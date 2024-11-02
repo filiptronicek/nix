@@ -33,6 +33,7 @@
         pkgs.zoxide # todo: do the whole dance with zoxide
         pkgs.jq
         pkgs.yq
+        pkgs.gnupg
 
         # GUIs
         pkgs.git-credential-manager
@@ -67,6 +68,7 @@
         enable = true;
         brews = [
           "bettercap"
+          "gnupg"
         ];
         casks = [
           "firefox"
@@ -161,6 +163,9 @@
                 init.defaultBranch = "main";
                 pull.rebase = true;
                 core.editor = "code --wait";
+
+                commit.gpgSign = true;
+                gpg.program = "${pkgs.gnupg}/bin/gpg";
               };
             };
           };
