@@ -168,6 +168,10 @@
                 gpg.program = "${pkgs.gnupg}/bin/gpg";
               };
             };
+            programs.zoxide = {
+              enable = true;
+              enableZshIntegration = true;
+            };
           };
           
           nix-homebrew = {
