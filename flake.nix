@@ -98,6 +98,7 @@
           "zotero"
           "github"
           "jetbrains-toolbox"
+          "adobe-creative-cloud"
         ];
 
         onActivation.cleanup = "zap";
