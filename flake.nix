@@ -50,7 +50,7 @@
 
         pkgs.vscodium
         pkgs.vscode
-        pkgs.zed
+        pkgs.knot-dns
         ];
 
       nixpkgs.config.allowUnfree = true;
@@ -69,6 +69,8 @@
         brews = [
           "bettercap"
           "gnupg"
+          "go"
+          "nvm"
         ];
         casks = [
           "firefox"
@@ -99,6 +101,7 @@
           "github"
           "jetbrains-toolbox"
           "adobe-creative-cloud"
+          "zed"
         ];
 
         onActivation.cleanup = "zap";
