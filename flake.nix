@@ -34,6 +34,8 @@
         pkgs.jq
         pkgs.yq
         pkgs.gnupg
+        pkgs.unixtools.watch
+        pkgs.nixd
 
         # GUIs
         pkgs.git-credential-manager
@@ -48,8 +50,6 @@
         pkgs.monitorcontrol
         pkgs.wireshark-qt
 
-        pkgs.vscodium
-        pkgs.vscode
         pkgs.knot-dns
         ];
 
@@ -71,6 +71,7 @@
           "gnupg"
           "go"
           "nvm"
+          "handbrake"
         ];
         casks = [
           "firefox"
@@ -102,6 +103,10 @@
           "jetbrains-toolbox"
           "adobe-creative-cloud"
           "zed"
+          "visual-studio-code"
+          "vscodium"
+          "utm"
+          "signal"
         ];
 
         onActivation.cleanup = "zap";
@@ -177,7 +182,7 @@
               enableZshIntegration = true;
             };
           };
-          
+
           nix-homebrew = {
             enable = true;
             enableRosetta = true;
