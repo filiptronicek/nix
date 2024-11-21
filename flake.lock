@@ -99,11 +99,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1732055108,
-        "narHash": "sha256-7fW9uTLG6G9pJo9c4uenwUi+WT2jUz4jAp7Xh0EnYxU=",
+        "lastModified": 1732145543,
+        "narHash": "sha256-VRQh/lvCSko9YV7haXyPt7DSp+EkgjjBv/9U4cY9c50=",
         "owner": "zhaofengli",
         "repo": "nix-homebrew",
-        "rev": "5eb00c5e0141be799d4708136dc036b23b2f9b4a",
+        "rev": "ac3945ee614f69ab89c6935b3f0567028de5f012",
         "type": "github"
       },
       "original": {
