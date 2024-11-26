@@ -39,8 +39,6 @@
 
         # GUIs
         pkgs.git-credential-manager
-        pkgs.discord
-        pkgs.slack
         pkgs.arc-browser
         pkgs.audacity
         pkgs.raycast
@@ -107,6 +105,9 @@
           "vscodium"
           "utm"
           "signal"
+          "microsoft-powerpoint"
+          "discord"
+          "slack"
         ];
 
         onActivation.cleanup = "zap";
@@ -118,8 +119,8 @@
           # "/System/Library/CoreServices/Finder.app" this is always there
           "/System/Volumes/Data/Applications/Firefox Developer Edition.app"
           "/System/Volumes/Data/Applications/Thunderbird.app"
-          "${pkgs.discord}/Applications/Discord.app"
-          "${pkgs.slack}/Applications/Slack.app"
+          "/System/Volumes/Data/Applications/Slack.app"
+          "/System/Volumes/Data/Applications/Discord.app"
           ];
 
         finder.AppleShowAllExtensions = true;
