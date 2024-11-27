@@ -108,6 +108,7 @@
           "microsoft-powerpoint"
           "discord"
           "slack"
+          "parsec"
         ];
 
         onActivation.cleanup = "zap";
