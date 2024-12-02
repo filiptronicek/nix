@@ -39,7 +39,6 @@
 
         # GUIs
         pkgs.git-credential-manager
-        pkgs.arc-browser
         pkgs.audacity
         pkgs.raycast
         pkgs.qbittorrent
@@ -72,11 +71,7 @@
           "handbrake"
         ];
         casks = [
-          "firefox"
-          "firefox@nightly"
           "figma"
-          "safari-technology-preview"
-          "eloston-chromium"
           "loom"
           "ukelele"
           "amie"
@@ -109,6 +104,14 @@
           "discord"
           "slack"
           "parsec"
+          "obs"
+
+          "tor-browser"
+          "arc"
+          "firefox"
+          "firefox@nightly"
+          "safari-technology-preview"
+          "eloston-chromium"
         ];
 
         onActivation.cleanup = "zap";
