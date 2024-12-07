@@ -36,6 +36,7 @@
         pkgs.gnupg
         pkgs.unixtools.watch
         pkgs.nixd
+        pkgs.python314
 
         # GUIs
         pkgs.git-credential-manager
@@ -110,7 +111,8 @@
           "arc"
           "firefox"
           "firefox@nightly"
-          "safari-technology-preview"
+          "firefox@developer-edition"
+          # "safari-technology-preview" -- looks like it's having trouble lately
           "eloston-chromium"
         ];
 
