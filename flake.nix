@@ -106,6 +106,7 @@
           "slack"
           "parsec"
           "obs"
+          "meetingbar"
 
           "tor-browser"
           "arc"
