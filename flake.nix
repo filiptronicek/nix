@@ -46,6 +46,8 @@
             pkgs.zoxide # todo: do the whole dance with zoxide
             pkgs.jq
             pkgs.yq
+            pkgs.pv
+            pkgs.p7zip
             pkgs.gnupg
             pkgs.unixtools.watch
             pkgs.nixd
@@ -91,6 +93,7 @@
               "go"
               "nvm"
               "handbrake"
+              "paperjam"
             ];
             casks = [
               "figma"
