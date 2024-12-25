@@ -60,7 +60,6 @@
             pkgs.audacity
             pkgs.raycast
             pkgs.qbittorrent
-            pkgs.obsidian
             pkgs.warp-terminal
             pkgs.monitorcontrol
             pkgs.wireshark-qt
@@ -131,6 +130,7 @@
               "parsec"
               "obs"
               "meetingbar"
+              "obsidian"
 
               "tor-browser"
               "arc"
