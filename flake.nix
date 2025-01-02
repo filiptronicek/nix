@@ -54,6 +54,7 @@
             pkgs.python314
             pkgs.defaultbrowser
             pkgs.nixfmt-rfc-style
+            pkgs.tree
 
             # GUIs
             pkgs.git-credential-manager
