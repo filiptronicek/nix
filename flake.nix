@@ -36,6 +36,7 @@
             pkgs.rclone
             pkgs.lolcat
             pkgs.awscli2
+            pkgs.google-cloud-sdk
             pkgs.bun
             pkgs.pre-commit
             pkgs.pandoc
@@ -52,6 +53,7 @@
             pkgs.unixtools.watch
             pkgs.nixd
             pkgs.python314
+            pkgs.pipx
             pkgs.defaultbrowser
             pkgs.nixfmt-rfc-style
             pkgs.tree
