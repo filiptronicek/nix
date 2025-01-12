@@ -57,6 +57,7 @@
             pkgs.defaultbrowser
             pkgs.nixfmt-rfc-style
             pkgs.tree
+            pkgs.turso-cli
 
             # GUIs
             pkgs.git-credential-manager
