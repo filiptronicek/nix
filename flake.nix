@@ -58,6 +58,7 @@
             pkgs.nixfmt-rfc-style
             pkgs.tree
             pkgs.turso-cli
+	    pkgs.cloudflared
 
             # GUIs
             pkgs.git-credential-manager
