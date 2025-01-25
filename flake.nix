@@ -58,7 +58,8 @@
             pkgs.nixfmt-rfc-style
             pkgs.tree
             pkgs.turso-cli
-	    pkgs.cloudflared
+            pkgs.cloudflared
+            pkgs.atlas
 
             # GUIs
             pkgs.git-credential-manager
@@ -106,7 +107,6 @@
               "amie"
               "orbstack"
               "linear-linear"
-              "nvidia-geforce-now"
               "shottr"
               "tailscale"
               "cursor"
@@ -136,6 +136,7 @@
               "obs"
               "meetingbar"
               "obsidian"
+              "ollama"
 
               "tor-browser"
               "arc"
