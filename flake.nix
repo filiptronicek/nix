@@ -216,7 +216,7 @@
                   extraConfig = {
                     init.defaultBranch = "main";
                     pull.rebase = true;
-                    core.editor = "code --wait";
+                    core.editor = "cursor --wait";
 
                     commit.gpgSign = true;
                     gpg.program = "${pkgs.gnupg}/bin/gpg";
