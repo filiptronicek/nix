@@ -44,7 +44,7 @@
             pkgs.fastfetch
             pkgs.coreutils
             pkgs.ffmpeg
-            pkgs.zoxide # todo: do the whole dance with zoxide
+            pkgs.zoxide
             pkgs.jq
             pkgs.yq
             pkgs.pv
@@ -234,8 +234,15 @@
                   };
 
                   initExtra = ''
-                    # Put your custom zsh configurations here
-                    # This is equivalent to what you'd put in .zshrc
+                    # NVM initialization
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+                    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+                    # Install LTS Node.js if not already installed
+                    [ ! -e "$NVM_DIR/versions/node" ] && nvm install --lts
+
+                    eval "$(zoxide init zsh --cmd cd)"
                   '';
                 };
               };
