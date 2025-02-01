@@ -20,7 +20,7 @@
     }:
     let
       vars = {
-        defaultbrowser = "firefoxdeveloperedition";
+        defaultbrowser = "browser"; # the registered name for Arc https://github.com/kerma/defaultbrowser/issues/27
       };
       configuration =
         { pkgs, ... }:
@@ -144,6 +144,7 @@
               "firefox@nightly"
               "firefox@developer-edition"
               "eloston-chromium"
+              "zen-browser"
             ];
 
             onActivation.cleanup = "zap";
