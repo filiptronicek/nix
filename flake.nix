@@ -60,6 +60,9 @@
             pkgs.turso-cli
             pkgs.cloudflared
             pkgs.atlas
+            pkgs.dust
+            pkgs.cmake
+            pkgs.rustup
 
             # GUIs
             pkgs.git-credential-manager
@@ -75,7 +78,8 @@
 
           # Add activation script for defaultbrowser
           system.activationScripts.postUserActivation.text = ''
-            defaultbrowser ${vars.defaultbrowser}
+            defaultbrowser ${vars.defaultbrowser};
+            rustup default stable;
           '';
 
           nixpkgs.config.allowUnfree = true;
@@ -97,6 +101,7 @@
               "gnupg"
               "go"
               "nvm"
+              "pnpm"
               "handbrake"
               "paperjam"
             ];
@@ -109,7 +114,6 @@
               "linear-linear"
               "shottr"
               "tailscale"
-              "cursor"
               "stats"
               "karabiner-elements"
               "vlc"
@@ -124,9 +128,12 @@
               "github"
               "jetbrains-toolbox"
               "adobe-creative-cloud"
+
               "zed"
               "visual-studio-code"
               "vscodium"
+              "cursor"
+
               "utm"
               "signal"
               "microsoft-powerpoint"
@@ -183,6 +190,10 @@
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
           {
+            environment.variables = {
+              EDITOR = "cursor --wait";
+            };
+
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.filip =
@@ -205,6 +216,27 @@
                 programs.zoxide = {
                   enable = true;
                   enableZshIntegration = true;
+                };
+
+                programs.zsh = {
+                  enable = true;
+                  enableCompletion = true;
+                  autosuggestion = {
+                    enable = true;
+                  };
+
+                  shellAliases = {
+                    gocov = "go test -cover ./...";
+                    update = "{ cd ~/.config/nix && nix flake update && darwin-rebuild switch --flake ~/.config/nix#mbp } && brew update && brew upgrade";
+
+                    ytmp3 = "yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'";
+                    ytvideo = "yt-dlp -f bestvideo+bestaudio --merge-output-format mov -o '%(title)s.%(ext)s'";
+                  };
+
+                  initExtra = ''
+                    # Put your custom zsh configurations here
+                    # This is equivalent to what you'd put in .zshrc
+                  '';
                 };
               };
 
