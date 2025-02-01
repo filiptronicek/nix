@@ -80,6 +80,15 @@
           system.activationScripts.postUserActivation.text = ''
             defaultbrowser ${vars.defaultbrowser};
             rustup default stable;
+
+            # Handle MonitorControl login item
+            osascript -e '
+            tell application "System Events"
+              try
+                delete (every login item whose name is "MonitorControl")
+              end try
+              make login item at end with properties {path:"${pkgs.monitorcontrol}/Applications/MonitorControl.app", hidden:false}
+            end tell'
           '';
 
           nixpkgs.config.allowUnfree = true;
