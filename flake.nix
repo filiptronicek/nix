@@ -29,42 +29,56 @@
           # $ nix-env -qaP | grep wget
           environment.systemPackages = [
             pkgs.neovim
-            pkgs.gh
             pkgs.git
-            pkgs.wget
-            pkgs.yt-dlp
-            pkgs.rclone
-            pkgs.lolcat
-            pkgs.awscli2
-            pkgs.google-cloud-sdk
-            pkgs.bun
+            pkgs.gh
             pkgs.pre-commit
-            pkgs.pandoc
-            pkgs.imagemagick
-            pkgs.fastfetch
-            pkgs.coreutils
-            pkgs.ffmpeg
-            pkgs.zoxide
-            pkgs.jq
-            pkgs.yq
-            pkgs.pv
-            pkgs.p7zip
-            pkgs.gnupg
-            pkgs.unixtools.watch
             pkgs.nixd
-            pkgs.python314
-            pkgs.pipx
-            pkgs.defaultbrowser
             pkgs.nixfmt-rfc-style
-            pkgs.tree
-            pkgs.turso-cli
-            pkgs.cloudflared
-            pkgs.atlas
-            pkgs.dust
             pkgs.cmake
             pkgs.rustup
 
-            # GUIs
+            # Cloud & Infrastructure
+            pkgs.awscli2
+            pkgs.google-cloud-sdk
+            pkgs.turso-cli
+            pkgs.cloudflared
+            pkgs.atlas
+
+            # Languages & Runtime
+            pkgs.python314
+            pkgs.pipx
+            pkgs.bun
+
+            # System & File Utilities
+            pkgs.coreutils
+            pkgs.tree
+            pkgs.wget
+            pkgs.rclone
+            pkgs.p7zip
+            pkgs.dust
+            pkgs.bottom
+            pkgs.unixtools.watch
+            pkgs.defaultbrowser
+            pkgs.zoxide
+
+            # Data Processing & Formatting
+            pkgs.jq
+            pkgs.yq
+            pkgs.pandoc
+            pkgs.pv
+
+            pkgs.ffmpeg
+            pkgs.imagemagick
+            pkgs.yt-dlp
+
+            pkgs.gnupg
+            pkgs.knot-dns
+
+            # Misc
+            pkgs.fastfetch
+            pkgs.lolcat
+
+            # GUI Applications
             pkgs.git-credential-manager
             pkgs.audacity
             pkgs.raycast
@@ -72,8 +86,6 @@
             pkgs.warp-terminal
             pkgs.monitorcontrol
             pkgs.wireshark-qt
-
-            pkgs.knot-dns
           ];
 
           # Add activation script for defaultbrowser
@@ -131,12 +143,17 @@
               "1password"
               "blender"
               "thunderbird"
-              "lunar-client"
-              "steam"
               "zotero"
               "github"
               "jetbrains-toolbox"
               "adobe-creative-cloud"
+
+              "swiftdefaultappsprefpane"
+              "meetingbar"
+
+              "lunar-client"
+              "whisky"
+              "steam"
 
               "zed"
               "visual-studio-code"
@@ -168,6 +185,7 @@
 
           system.defaults = {
             dock.autohide = true;
+            dock.tilesize = 60;
             dock.persistent-apps = [
               "/System/Volumes/Data/Applications/Firefox Developer Edition.app"
               "/System/Volumes/Data/Applications/Thunderbird.app"
