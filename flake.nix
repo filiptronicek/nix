@@ -246,7 +246,7 @@
                     core.editor = "cursor --wait";
 
                     column.ui = "auto";
-                    branch.sort = "-commiterdate";
+                    branch.sort = "committerdate";
                     tag.sort = "version:refname";
 
                     diff.algorithm = "histogram";
