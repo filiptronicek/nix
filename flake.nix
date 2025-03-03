@@ -176,11 +176,11 @@
               "meetingbar"
               "obsidian"
               "ollama"
+              "veracrypt"
 
               "tor-browser"
               "arc"
-              "firefox"
-              "firefox@nightly"
+              "librewolf"
               "firefox@developer-edition"
               "eloston-chromium"
               "zen-browser"
