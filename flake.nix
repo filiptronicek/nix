@@ -73,6 +73,7 @@
 
             pkgs.gnupg
             pkgs.knot-dns
+            pkgs.nmap
 
             # Misc
             pkgs.fastfetch
@@ -153,6 +154,7 @@
               "github"
               "jetbrains-toolbox"
               "adobe-creative-cloud"
+              "microsoft-openjdk@21"
 
               "swiftdefaultappsprefpane"
               "meetingbar"
