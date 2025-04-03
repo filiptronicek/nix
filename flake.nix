@@ -43,6 +43,7 @@
             pkgs.turso-cli
             pkgs.cloudflared
             pkgs.atlas
+            pkgs.golangci-lint
 
             # Languages & Runtime
             pkgs.python314
