@@ -307,6 +307,8 @@
                     # Install LTS Node.js if not already installed
                     [ ! -e "$NVM_DIR/versions/node" ] && nvm install --lts
 
+                    export PATH="$PATH:$(go env GOPATH)/bin"
+
                     eval "$(zoxide init zsh --cmd cd)"
                   '';
                 };
