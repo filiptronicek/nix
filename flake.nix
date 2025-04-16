@@ -133,6 +133,7 @@
               "pnpm"
               "handbrake"
               "paperjam"
+              "gnu-sed"
             ];
             casks = [
               "figma"
