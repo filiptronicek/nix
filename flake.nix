@@ -299,7 +299,7 @@
                     ytvideo = "yt-dlp -f bestvideo+bestaudio --merge-output-format mov -o '%(title)s.%(ext)s'";
                   };
 
-                  initExtra = ''
+                  initContent = ''
                     # NVM initialization
                     export NVM_DIR="$HOME/.nvm"
                     [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
