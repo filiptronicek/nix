@@ -85,7 +85,6 @@
             pkgs.audacity
             pkgs.raycast
             pkgs.qbittorrent
-            pkgs.warp-terminal
             pkgs.monitorcontrol
             pkgs.wireshark-qt
           ];
@@ -181,6 +180,7 @@
               "obsidian"
               "ollama"
               "veracrypt"
+              "warp"
 
               "tor-browser"
               "arc"
