@@ -21,6 +21,8 @@
     let
       vars = {
         defaultbrowser = "browser"; # the registered name for Arc https://github.com/kerma/defaultbrowser/issues/27
+        username = "filip";
+        homeDirectory = "/Users/${vars.username}";
       };
       configuration =
         { pkgs, ... }:
@@ -52,7 +54,6 @@
 
             # System & File Utilities
             pkgs.coreutils
-            pkgs.tree
             pkgs.wget
             pkgs.rclone
             pkgs.p7zip
@@ -61,6 +62,8 @@
             pkgs.unixtools.watch
             pkgs.defaultbrowser
             pkgs.zoxide
+            pkgs.bat
+            pkgs.eza
 
             # Data Processing & Formatting
             pkgs.jq
@@ -89,19 +92,23 @@
             pkgs.wireshark-qt
           ];
 
-          # Add activation script for defaultbrowser
-          system.activationScripts.postUserActivation.text = ''
-            defaultbrowser ${vars.defaultbrowser};
-            rustup default stable;
+          # Add activation script
+          system.activationScripts.extraActivation.text = ''
+            # Run defaultbrowser as the primary user
+            sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser}
+            
+            # Handle MonitorControl login item as primary user
+            sudo -u ${vars.username} osascript -e '
+              tell application "System Events"
+                try
+                  delete (every login item whose name is "MonitorControl")
+                end try
+                make login item at end with properties {path:"${pkgs.monitorcontrol}/Applications/MonitorControl.app", hidden:false}
+              end tell
+            '
 
-            # Handle MonitorControl login item
-            osascript -e '
-            tell application "System Events"
-              try
-                delete (every login item whose name is "MonitorControl")
-              end try
-              make login item at end with properties {path:"${pkgs.monitorcontrol}/Applications/MonitorControl.app", hidden:false}
-            end tell'
+            # Set rustup default (moved from activation script)
+            command -v rustup >/dev/null && rustup default stable
           '';
 
           environment.etc."pam.d/sudo_local".text = ''
@@ -117,10 +124,13 @@
             pkgs.lexend
           ];
 
-          users.users.filip = {
-            name = "filip";
-            home = "/Users/filip";
+          users.users.${vars.username} = {
+            name = vars.username;
+            home = vars.homeDirectory;
           };
+          
+          # Set primary user for homebrew and user-specific settings
+          system.primaryUser = vars.username;
 
           homebrew = {
             enable = true;
@@ -232,7 +242,7 @@
 
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.filip =
+            home-manager.users.${vars.username} =
               { pkgs, ... }:
               {
                 home.stateVersion = "24.05";
@@ -293,10 +303,17 @@
 
                   shellAliases = {
                     gocov = "go test -cover ./...";
-                    update = "{ cd ~/.config/nix && nix flake update && darwin-rebuild switch --flake ~/.config/nix#mbp } && brew update && brew upgrade";
+                    update = "{ cd ~/.config/nix && nix flake update && sudo darwin-rebuild switch --flake ~/.config/nix#mbp } && brew update && brew upgrade";
 
                     ytmp3 = "yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'";
                     ytvideo = "yt-dlp -f bestvideo+bestaudio --merge-output-format mov -o '%(title)s.%(ext)s'";
+
+                    # GNU utils alternatives
+                    cat = "bat";
+                    ls = "eza";
+                    ll = "eza -l";
+                    la = "eza -la";
+                    tree = "eza -T";
                   };
 
                   initContent = ''
@@ -318,7 +335,7 @@
             nix-homebrew = {
               enable = true;
               enableRosetta = true;
-              user = "filip";
+              user = vars.username;
               autoMigrate = true;
             };
           }
