@@ -238,7 +238,7 @@
           home-manager.darwinModules.home-manager
           {
             environment.variables = {
-              EDITOR = "cursor --wait";
+              EDITOR = "code --wait";
             };
 
             home-manager.useGlobalPkgs = true;
@@ -264,7 +264,7 @@
                     fetch.pruneTags = true;
                     fetch.all = true;
 
-                    core.editor = "cursor --wait";
+                    core.editor = "code --wait";
 
                     column.ui = "auto";
                     branch.sort = "committerdate";
