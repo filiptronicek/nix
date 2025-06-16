@@ -38,6 +38,7 @@
             pkgs.nixfmt-rfc-style
             pkgs.cmake
             pkgs.rustup
+            pkgs.ruby
 
             # Cloud & Infrastructure
             pkgs.awscli2
@@ -96,7 +97,7 @@
           system.activationScripts.extraActivation.text = ''
             # Run defaultbrowser as the primary user
             sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser}
-            
+
             # Handle MonitorControl login item as primary user
             sudo -u ${vars.username} osascript -e '
               tell application "System Events"
@@ -128,7 +129,7 @@
             name = vars.username;
             home = vars.homeDirectory;
           };
-          
+
           # Set primary user for homebrew and user-specific settings
           system.primaryUser = vars.username;
 
@@ -326,6 +327,7 @@
                     [ ! -e "$NVM_DIR/versions/node" ] && nvm install --lts
 
                     export PATH="$PATH:$(go env GOPATH)/bin"
+                    export PATH="$(gem env gemdir)/bin:$PATH"
 
                     eval "$(zoxide init zsh --cmd cd)"
                   '';
