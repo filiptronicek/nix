@@ -20,7 +20,7 @@
     }:
     let
       vars = {
-        defaultbrowser = "zen";
+        defaultbrowser = "browser"; # the registered name for Arc https://github.com/kerma/defaultbrowser/issues/27
         username = "filip";
         homeDirectory = "/Users/${vars.username}";
       };
@@ -208,7 +208,7 @@
             dock.autohide = true;
             dock.tilesize = 60;
             dock.persistent-apps = [
-              "/System/Volumes/Data/Applications/Zen.app"
+              "/System/Volumes/Data/Applications/Firefox Developer Edition.app"
               "/System/Volumes/Data/Applications/Thunderbird.app"
               "/System/Volumes/Data/Applications/Slack.app"
               "/System/Volumes/Data/Applications/Discord.app"
