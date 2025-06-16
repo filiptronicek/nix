@@ -198,7 +198,7 @@
               "librewolf"
               "firefox@developer-edition"
               "eloston-chromium"
-              "zen-browser"
+              "zen"
             ];
 
             onActivation.cleanup = "zap";
