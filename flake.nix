@@ -182,6 +182,7 @@
 
               "utm"
               "signal"
+              "telegram"
               "microsoft-powerpoint"
               "discord"
               "slack"
@@ -197,7 +198,7 @@
               "arc"
               "librewolf"
               "firefox@developer-edition"
-              "eloston-chromium"
+              "ungoogled-chromium"
               "zen"
             ];
 
