@@ -156,9 +156,7 @@
               "tailscale"
               "stats"
               "karabiner-elements"
-              "vlc"
               "rustdesk"
-              "handbrake"
               "1password"
               "blender"
               "thunderbird"
@@ -167,6 +165,10 @@
               "jetbrains-toolbox"
               "adobe-creative-cloud"
               "microsoft-openjdk@21"
+
+              "vlc"
+              "handbrake-app"
+              "kodi"
 
               "swiftdefaultappsprefpane"
               "meetingbar"
@@ -212,7 +214,6 @@
               "/System/Volumes/Data/Applications/Firefox Developer Edition.app"
               "/System/Volumes/Data/Applications/Thunderbird.app"
               "/System/Volumes/Data/Applications/Slack.app"
-              "/System/Volumes/Data/Applications/Discord.app"
             ];
 
             finder.AppleShowAllExtensions = true;
