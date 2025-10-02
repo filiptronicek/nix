@@ -20,7 +20,7 @@
     }:
     let
       vars = {
-        defaultbrowser = "browser"; # the registered name for Arc https://github.com/kerma/defaultbrowser/issues/27
+        defaultbrowser = "firefoxdeveloperedition";
         username = "filip";
         homeDirectory = "/Users/${vars.username}";
       };
