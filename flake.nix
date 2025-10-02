@@ -75,6 +75,7 @@
             pkgs.ffmpeg
             pkgs.imagemagick
             pkgs.yt-dlp
+            pkgs.shaka-packager
 
             pkgs.gnupg
             pkgs.knot-dns
@@ -87,7 +88,6 @@
             # GUI Applications
             pkgs.git-credential-manager
             pkgs.audacity
-            pkgs.raycast
             pkgs.qbittorrent
             pkgs.monitorcontrol
             pkgs.wireshark-qt
@@ -148,6 +148,7 @@
             casks = [
               "figma"
               "loom"
+              "raycast"
               "ukelele"
               "amie"
               "orbstack"
@@ -185,7 +186,10 @@
               "utm"
               "signal"
               "telegram"
+
               "microsoft-powerpoint"
+              "microsoft-word"
+
               "discord"
               "slack"
               "parsec"
