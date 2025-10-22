@@ -53,6 +53,8 @@
             pkgs.pipx
             pkgs.bun
 
+            pkgs.texliveMedium
+
             # System & File Utilities
             pkgs.coreutils
             pkgs.wget
@@ -166,6 +168,7 @@
               "jetbrains-toolbox"
               "adobe-creative-cloud"
               "microsoft-openjdk@21"
+              "omnissa-horizon-client"
 
               "vlc"
               "handbrake-app"
