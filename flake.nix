@@ -258,9 +258,10 @@
                 home.stateVersion = "25.05";
                 programs.git = {
                   enable = true;
-                  userName = "Filip Troníček";
-                  userEmail = "filip.tronicek@seznam.cz";
-                  extraConfig = {
+                  settings = {
+                    user.name = "Filip Troníček";
+                    user.email = "filip.tronicek@seznam.cz";
+
                     init.defaultBranch = "main";
 
                     pull.rebase = true;
