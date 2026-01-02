@@ -20,7 +20,7 @@
     }:
     let
       vars = {
-        defaultbrowser = "firefoxdeveloperedition";
+        defaultbrowser = "browser"; # this is what Arc is
         username = "filip";
         homeDirectory = "/Users/${vars.username}";
       };
@@ -77,7 +77,7 @@
             pkgs.ffmpeg
             pkgs.imagemagick
             pkgs.yt-dlp
-            pkgs.shaka-packager
+            # pkgs.shaka-packager
 
             pkgs.gnupg
             pkgs.knot-dns
@@ -92,7 +92,6 @@
             pkgs.audacity
             pkgs.qbittorrent
             pkgs.monitorcontrol
-            pkgs.wireshark-qt
           ];
 
           # Add activation script
@@ -169,6 +168,7 @@
               "adobe-creative-cloud"
               "microsoft-openjdk@21"
               "omnissa-horizon-client"
+              "wireshark-app"
 
               "vlc"
               "handbrake-app"
