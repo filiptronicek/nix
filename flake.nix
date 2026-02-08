@@ -33,9 +33,9 @@
             pkgs.neovim
             pkgs.git
             pkgs.gh
-            pkgs.pre-commit
+            # pkgs.pre-commit # needs swift :/
             pkgs.nixd
-            pkgs.nixfmt-rfc-style
+            pkgs.nixfmt
             pkgs.cmake
             pkgs.rustup
             pkgs.ruby
@@ -67,6 +67,8 @@
             pkgs.zoxide
             pkgs.bat
             pkgs.eza
+            pkgs.zstd
+            pkgs.upx
 
             # Data Processing & Formatting
             pkgs.jq
@@ -77,7 +79,10 @@
             pkgs.ffmpeg
             pkgs.imagemagick
             pkgs.yt-dlp
-            # pkgs.shaka-packager
+            pkgs.shaka-packager
+
+            # LLMs
+            pkgs.claude-code
 
             pkgs.gnupg
             pkgs.knot-dns
@@ -88,10 +93,11 @@
             pkgs.lolcat
 
             # GUI Applications
-            pkgs.git-credential-manager
+            # pkgs.git-credential-manager # needs Swift as well, which breaks
             pkgs.audacity
             pkgs.qbittorrent
             pkgs.monitorcontrol
+            pkgs.duti
           ];
 
           # Add activation script
@@ -100,17 +106,20 @@
             sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser}
 
             # Handle MonitorControl login item as primary user
-            sudo -u ${vars.username} osascript -e '
+            sudo -u ${vars.username} osascript <<EOF
               tell application "System Events"
                 try
                   delete (every login item whose name is "MonitorControl")
                 end try
                 make login item at end with properties {path:"${pkgs.monitorcontrol}/Applications/MonitorControl.app", hidden:false}
               end tell
-            '
+EOF
 
             # Set rustup default (moved from activation script)
             command -v rustup >/dev/null && rustup default stable
+
+            # Set default applications for file types
+            sudo -u ${vars.username} ${pkgs.duti}/bin/duti ${./duti-config.txt}
           '';
 
           environment.etc."pam.d/sudo_local".text = ''

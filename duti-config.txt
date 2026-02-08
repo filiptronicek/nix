@@ -1,0 +1,14 @@
+# PDF files - Firefox Developer Edition
+org.mozilla.firefoxdeveloperedition com.adobe.pdf all
+
+# Video files - VLC
+org.videolan.vlc public.movie all
+org.videolan.vlc public.video all
+org.videolan.vlc public.audiovisual-content all
+
+# Audio files - VLC
+org.videolan.vlc public.audio all
+org.videolan.vlc public.mp3 all
+org.videolan.vlc public.mpeg-4-audio all
+org.videolan.vlc com.microsoft.waveform-audio all
+org.videolan.vlc org.xiph.flac all
