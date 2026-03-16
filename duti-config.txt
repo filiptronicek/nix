@@ -7,6 +7,7 @@ org.videolan.vlc public.video all
 org.videolan.vlc public.audiovisual-content all
 org.videolan.vlc public.mpeg-4 all
 org.videolan.vlc com.apple.quicktime-movie all
+org.videolan.vlc org.webmproject.webm all
 
 # Audio files - VLC
 org.videolan.vlc public.audio all

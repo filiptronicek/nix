@@ -102,24 +102,24 @@
 
           # Add activation script
           system.activationScripts.extraActivation.text = ''
-            # Run defaultbrowser as the primary user
-            sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser}
+                        # Run defaultbrowser as the primary user
+                        sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser}
 
-            # Handle MonitorControl login item as primary user
-            sudo -u ${vars.username} osascript <<EOF
-              tell application "System Events"
-                try
-                  delete (every login item whose name is "MonitorControl")
-                end try
-                make login item at end with properties {path:"${pkgs.monitorcontrol}/Applications/MonitorControl.app", hidden:false}
-              end tell
-EOF
+                        # Handle MonitorControl login item as primary user
+                        sudo -u ${vars.username} osascript <<EOF
+                          tell application "System Events"
+                            try
+                              delete (every login item whose name is "MonitorControl")
+                            end try
+                            make login item at end with properties {path:"${pkgs.monitorcontrol}/Applications/MonitorControl.app", hidden:false}
+                          end tell
+            EOF
 
-            # Set rustup default (moved from activation script)
-            command -v rustup >/dev/null && rustup default stable
+                        # Set rustup default (moved from activation script)
+                        command -v rustup >/dev/null && rustup default stable
 
-            # Set default applications for file types
-            sudo -u ${vars.username} ${pkgs.duti}/bin/duti ${./duti-config.txt}
+                        # Set default applications for file types
+                        sudo -u ${vars.username} ${pkgs.duti}/bin/duti ${./duti-config.txt}
           '';
 
           environment.etc."pam.d/sudo_local".text = ''
@@ -154,6 +154,7 @@ EOF
               "handbrake"
               "paperjam"
               "gnu-sed"
+              "php"
             ];
             casks = [
               "figma"
@@ -327,6 +328,8 @@ EOF
 
                     ytmp3 = "yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'";
                     ytvideo = "yt-dlp -f bestvideo+bestaudio --merge-output-format mov -o '%(title)s.%(ext)s'";
+
+                    ona = "gitpod";
 
                     # GNU utils alternatives
                     cat = "bat";
