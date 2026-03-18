@@ -33,7 +33,7 @@
             pkgs.neovim
             pkgs.git
             pkgs.gh
-            # pkgs.pre-commit # needs swift :/
+            pkgs.pre-commit
             pkgs.nixd
             pkgs.nixfmt
             pkgs.cmake
@@ -93,7 +93,7 @@
             pkgs.lolcat
 
             # GUI Applications
-            # pkgs.git-credential-manager # needs Swift as well, which breaks
+            pkgs.git-credential-manager
             pkgs.audacity
             pkgs.qbittorrent
             pkgs.monitorcontrol
