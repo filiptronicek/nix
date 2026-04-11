@@ -160,25 +160,31 @@
               "figma"
               "loom"
               "raycast"
-              "ukelele"
-              "amie"
               "orbstack"
-              "linear-linear"
-              "shottr"
               "tailscale"
-              "stats"
-              "karabiner-elements"
-              "rustdesk"
+              "linear-linear"
               "1password"
+              "github"
+              "jetbrains-toolbox"
+
+              "ukelele"
+              "karabiner-elements"
+              "stats"
+              "shottr"
+              "rustdesk"
+              "wireshark-app"
+
+              "xykong/tap/flux-markdown" # markdown rendering for QuickLook
+              "dockdoor" # ⌥⇥ windows previews
+              "hyperkey" # Caps Lock modifier for Super
+              "typewhisper/tap/typewhisper" # STT
+
               "blender"
               "thunderbird"
               "zotero"
-              "github"
-              "jetbrains-toolbox"
               "adobe-creative-cloud"
               "microsoft-openjdk@21"
               "omnissa-horizon-client"
-              "wireshark-app"
 
               "vlc"
               "handbrake-app"
