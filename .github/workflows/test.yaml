@@ -6,8 +6,8 @@ jobs:
   tests:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: cachix/install-nix-action@v27
+    - uses: actions/checkout@v6
+    - uses: cachix/install-nix-action@616559265b40713947b9c190a8ff4b507b5df49b # v31.10.4
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
     - run: nix run nix-darwin -- build --flake .#mbp
