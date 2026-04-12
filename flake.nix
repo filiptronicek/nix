@@ -7,6 +7,20 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     home-manager.url = "github:nix-community/home-manager";
+
+    # Custom tap sources — pinned via flake.lock
+    gitpod-tap = {
+      url = "github:gitpod-io/homebrew-tap";
+      flake = false;
+    };
+    xykong-tap = {
+      url = "github:xykong/homebrew-tap";
+      flake = false;
+    };
+    typewhisper-tap = {
+      url = "github:typewhisper/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs =
@@ -99,8 +113,18 @@
 
           # Add activation script
           system.activationScripts.extraActivation.text = ''
-                        # Run defaultbrowser as the primary user
-                        sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser}
+                        # Set Arc as default browser.
+                        # Arc must be launched at least once before it registers as an HTTP handler.
+                        # On a fresh install, open Arc in the background so it can register, then retry.
+                        if [ -d "/Applications/Arc.app" ]; then
+                          if ! sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser} 2>/dev/null; then
+                            echo "Arc not yet registered as an HTTP handler — launching Arc to register it..."
+                            sudo -u ${vars.username} open -a "Arc" 2>/dev/null || true
+                            sleep 5
+                            sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser} || \
+                              echo "Warning: Could not set Arc as default browser. Re-run 'sudo darwin-rebuild switch --flake ~/.config/nix#mbp' after Arc has launched."
+                          fi
+                        fi
 
                         # Handle MonitorControl login item as primary user
                         sudo -u ${vars.username} osascript <<EOF
@@ -152,6 +176,7 @@
               "paperjam"
               "gnu-sed"
               "php"
+              "gitpod-io/tap/ona"
             ];
             casks = [
               "figma"
@@ -172,7 +197,6 @@
               "wireshark-app"
 
               "xykong/tap/flux-markdown" # markdown rendering for QuickLook
-              "dockdoor" # ⌥⇥ windows previews
               "hyperkey" # Caps Lock modifier for Super
               "typewhisper/tap/typewhisper" # STT
 
@@ -365,6 +389,11 @@
               enableRosetta = true;
               user = vars.username;
               autoMigrate = true;
+              taps = {
+                "gitpod-io/homebrew-tap" = inputs.gitpod-tap;
+                "xykong/homebrew-tap" = inputs.xykong-tap;
+                "typewhisper/homebrew-tap" = inputs.typewhisper-tap;
+              };
             };
           }
         ];

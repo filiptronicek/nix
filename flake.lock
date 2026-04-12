@@ -17,6 +17,22 @@
         "type": "github"
       }
     },
+    "gitpod-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775992985,
+        "narHash": "sha256-uO8h7LZObfhHdlMe6ZcytirTfL+YAs9SOxMhNu2OCdA=",
+        "owner": "gitpod-io",
+        "repo": "homebrew-tap",
+        "rev": "91eefd8dfb408a36ed5cd4a956946c7fe105a03f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gitpod-io",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -107,10 +123,45 @@
     },
     "root": {
       "inputs": {
+        "gitpod-tap": "gitpod-tap",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "typewhisper-tap": "typewhisper-tap",
+        "xykong-tap": "xykong-tap"
+      }
+    },
+    "typewhisper-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775643597,
+        "narHash": "sha256-X9zW77WF9CCcgiIsu/yXZHHAIZ3ite+jaQ+aGWjm6S8=",
+        "owner": "typewhisper",
+        "repo": "homebrew-tap",
+        "rev": "8a0d99431bb6d4bc63b89f2b016cf39093011dcc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "typewhisper",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
+    "xykong-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775716219,
+        "narHash": "sha256-6UyJ3pwQnlnrwBMCTCKoqGAb8VoZHdJLjSBGoBkM8jc=",
+        "owner": "xykong",
+        "repo": "homebrew-tap",
+        "rev": "d3a5c7a13c5648937c1643b598a5d269d60f264b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xykong",
+        "repo": "homebrew-tap",
+        "type": "github"
       }
     }
   },
