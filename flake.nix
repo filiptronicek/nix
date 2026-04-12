@@ -81,9 +81,6 @@
             pkgs.yt-dlp
             pkgs.shaka-packager
 
-            # LLMs
-            pkgs.claude-code
-
             pkgs.gnupg
             pkgs.knot-dns
             pkgs.nmap
@@ -356,6 +353,7 @@
 
                     export PATH="$PATH:$(go env GOPATH)/bin"
                     export PATH="$(gem env gemdir)/bin:$PATH"
+                    export PATH="$HOME/.local/bin:$PATH"
 
                     eval "$(zoxide init zsh --cmd cd)"
                   '';
