@@ -356,8 +356,6 @@
                     ytmp3 = "yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'";
                     ytvideo = "yt-dlp -f bestvideo+bestaudio --merge-output-format mp4 -o '%(title)s.%(ext)s'";
 
-                    ona = "gitpod";
-
                     # GNU utils alternatives
                     cat = "bat";
                     ls = "eza";
