@@ -94,6 +94,7 @@
             pkgs.imagemagick
             pkgs.yt-dlp
             pkgs.shaka-packager
+            pkgs.mkvtoolnix
 
             pkgs.gnupg
             pkgs.knot-dns
@@ -206,6 +207,7 @@
               "adobe-creative-cloud"
               "microsoft-openjdk@21"
               "omnissa-horizon-client"
+              "cyberduck"
 
               "vlc"
               "handbrake-app"
