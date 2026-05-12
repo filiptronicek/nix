@@ -140,6 +140,10 @@
                         # Set rustup default (moved from activation script)
                         command -v rustup >/dev/null && rustup default stable
 
+                        # Use Cloudflare NTP for system time
+                        systemsetup -setnetworktimeserver time.cloudflare.com >/dev/null
+                        systemsetup -setusingnetworktime on >/dev/null
+
                         # Set default applications for file types
                         sudo -u ${vars.username} ${pkgs.duti}/bin/duti ${./duti-config.txt}
           '';
