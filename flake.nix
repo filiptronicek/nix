@@ -21,6 +21,11 @@
       url = "github:typewhisper/homebrew-tap";
       flake = false;
     };
+
+    dotfiles = {
+      url = "github:filiptronicek/dotfiles";
+      flake = false;
+    };
   };
 
   outputs =
@@ -143,6 +148,11 @@
                         # Use Cloudflare NTP for system time
                         systemsetup -setnetworktimeserver time.cloudflare.com >/dev/null
                         systemsetup -setusingnetworktime on >/dev/null
+
+                        # Install custom keyboard layouts system-wide.
+                        # After first install, add "CZX" via System Settings → Keyboard → Input Sources.
+                        install -d -m 755 "/Library/Keyboard Layouts"
+                        install -m 644 ${inputs.dotfiles}/code.ty.keylayout "/Library/Keyboard Layouts/code.ty.keylayout"
 
                         # Set default applications for file types
                         sudo -u ${vars.username} ${pkgs.duti}/bin/duti ${./duti-config.txt}
@@ -272,6 +282,34 @@
             NSGlobalDomain."com.apple.swipescrolldirection" = false;
             NSGlobalDomain.AppleICUForce24HourTime = true;
             NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
+
+            # Enabled keyboard input sources. CZX is the custom layout installed
+            # to /Library/Keyboard Layouts/ via the activation script above.
+            # May require a logout/login for macOS to register changes.
+            CustomUserPreferences."com.apple.HIToolbox".AppleEnabledInputSources = [
+              {
+                InputSourceKind = "Keyboard Layout";
+                "KeyboardLayout ID" = 0;
+                "KeyboardLayout Name" = "U.S.";
+              }
+              {
+                InputSourceKind = "Keyboard Layout";
+                "KeyboardLayout ID" = -9364;
+                "KeyboardLayout Name" = "CZX";
+              }
+              {
+                "Bundle ID" = "com.apple.CharacterPaletteIM";
+                InputSourceKind = "Non Keyboard Input Method";
+              }
+              {
+                "Bundle ID" = "com.apple.PressAndHold";
+                InputSourceKind = "Non Keyboard Input Method";
+              }
+              {
+                "Bundle ID" = "com.apple.inputmethod.ironwood";
+                InputSourceKind = "Non Keyboard Input Method";
+              }
+            ];
           };
 
           nix.settings.experimental-features = "nix-command flakes";
