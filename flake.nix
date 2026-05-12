@@ -52,6 +52,7 @@
             pkgs.neovim
             pkgs.git
             pkgs.gh
+            pkgs.home-manager
             pkgs.pre-commit
             pkgs.nixd
             pkgs.nixfmt
@@ -395,7 +396,7 @@
 
                   shellAliases = {
                     gocov = "go test -cover ./...";
-                    update = "{ cd ~/.config/nix && nix flake update && sudo darwin-rebuild switch --flake ~/.config/nix#mbp } && brew update && brew upgrade";
+                    update = "{ cd ~/.config/nix && nix flake update && sudo darwin-rebuild switch --flake ~/.config/nix#mbp } && brew update && brew upgrade && home-manager expire-generations '-14 days' && nix-collect-garbage --delete-older-than 14d && sudo nix-collect-garbage --delete-older-than 14d";
 
                     ytmp3 = "yt-dlp --ffmpeg-location ${pkgs.ffmpeg}/bin -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'";
                     ytvideo = "yt-dlp --ffmpeg-location ${pkgs.ffmpeg}/bin -f bestvideo+bestaudio --merge-output-format mp4 -o '%(title)s.%(ext)s'";
