@@ -67,6 +67,7 @@
             pkgs.cloudflared
             pkgs.atlas
             pkgs.golangci-lint
+            pkgs.wrangler
 
             # Languages & Runtime
             pkgs.python314
