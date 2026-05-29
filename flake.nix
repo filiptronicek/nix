@@ -89,7 +89,7 @@
             pkgs.home-manager
             pkgs.pre-commit
             pkgs.nixd
-            pkgs.nixfmt
+            pkgs.alejandra
             pkgs.cmake
             pkgs.rustup
             pkgs.ruby

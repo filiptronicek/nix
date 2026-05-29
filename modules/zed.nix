@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.zed-editor = {
     enable = true;
@@ -26,6 +26,7 @@
       autosave = "on_focus_change";
       cli_default_open_behavior = "new_window";
       diff_view_style = "unified";
+      soft_wrap = "editor_width";
 
       # Panel docking
       outline_panel.dock = "left";
@@ -41,9 +42,21 @@
         model_parameters = [ ];
       };
 
-      # Edit predictions (Copilot), but not in Markdown
+      # Edit predictions (Copilot), but not in Markdown or Plain Text
       edit_predictions.provider = "copilot";
-      languages.Markdown.show_edit_predictions = false;
+      languages = {
+        Markdown.show_edit_predictions = false;
+        "Plain Text".show_edit_predictions = false;
+        Nix = {
+          formatter = {
+            external = {
+              command = "${pkgs.alejandra}/bin/alejandra";
+              arguments = [ "-" ]; # read from stdin
+            };
+          };
+          format_on_save = "on";
+        };
+      };
     };
 
     userKeymaps = [
