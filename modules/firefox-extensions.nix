@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-let
+{pkgs, ...}: let
   amoUrl = slug: "https://addons.mozilla.org/firefox/downloads/latest/${slug}/latest.xpi";
 
   # addon-id → AMO slug
@@ -46,8 +44,7 @@ let
   # Extensions whose .xpi isn't on AMO — e.g. Zotero distributes their
   # own. Add as `"<addon-id>" = "<direct-xpi-url>";`.
   extraExtensions = {
-    "zotero@chnm.gmu.edu" =
-      "https://download.zotero.org/connector/firefox/release/Zotero_Connector-latest.xpi";
+    "zotero@chnm.gmu.edu" = "https://download.zotero.org/connector/firefox/release/Zotero_Connector-latest.xpi";
   };
 
   mkPolicy = url: {
@@ -66,8 +63,7 @@ let
   };
 
   policiesJson = pkgs.writeText "firefox-policies.json" (builtins.toJSON policies);
-in
-{
+in {
   system.activationScripts.extraActivation.text = ''
     # Firefox enterprise policies — declarative extension list.
     install -d -m 755 "/Library/Application Support/Mozilla"

@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   system.defaults = {
     dock.autohide = true;
     dock.tilesize = 60;

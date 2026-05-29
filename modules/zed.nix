@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.zed-editor = {
     enable = true;
     package = null; # installed via cask
@@ -39,7 +38,7 @@
       agent = {
         dock = "right";
         tool_permissions.default = "allow";
-        model_parameters = [ ];
+        model_parameters = [];
       };
 
       # Edit predictions (Copilot), but not in Markdown or Plain Text
@@ -51,7 +50,7 @@
           formatter = {
             external = {
               command = "${pkgs.alejandra}/bin/alejandra";
-              arguments = [ "-" ]; # read from stdin
+              arguments = ["-"]; # read from stdin
             };
           };
           format_on_save = "on";

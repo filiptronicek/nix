@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   # Firefox Developer Edition declarative config.
 
   programs.firefox = {
