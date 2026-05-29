@@ -222,164 +222,6 @@
           # Set primary user for homebrew and user-specific settings
           system.primaryUser = vars.username;
 
-          homebrew = {
-            enable = true;
-            brews = [
-              "bettercap"
-              "gnupg"
-              "go"
-              "pnpm"
-              "handbrake"
-              "paperjam"
-              "gnu-sed"
-              "php"
-              "gitpod-io/tap/ona"
-              "rust-analyzer"
-            ];
-            goPackages = [
-              "github.com/filiptronicek/bruh"
-              "github.com/mattn/bsky"
-              "github.com/bufbuild/buf/cmd/buf"
-              "github.com/go-delve/delve/cmd/dlv"
-              "github.com/tantalor93/dnspyre/v2"
-              "github.com/golangci/golangci-lint/cmd/golangci-lint"
-              "golang.org/x/tools/gopls"
-              "github.com/mitranim/gow"
-              "github.com/fullstorydev/grpcurl/cmd/grpcurl"
-              "github.com/interclip/iclip"
-              "github.com/tdewolff/minify/v2/cmd/minify"
-              "go.uber.org/mock/mockgen"
-              "github.com/csweichel/oci-tool"
-              "connectrpc.com/connect/cmd/protoc-gen-connect-go"
-              "github.com/sudorandom/protoc-gen-connect-openapi"
-              "google.golang.org/protobuf/cmd/protoc-gen-go"
-              "google.golang.org/grpc/cmd/protoc-gen-go-grpc"
-              "github.com/bufbuild/protoschema-plugins/cmd/protoc-gen-jsonschema"
-              "github.com/gitpod-io/gitpod-next/api/go/tools/logfields/protoc-logfields"
-              "github.com/boyter/scc/v3"
-              "honnef.co/go/tools/cmd/staticcheck"
-            ];
-            casks = [
-              "figma"
-              "loom"
-              "raycast"
-              "orbstack"
-              "tailscale-app"
-              "linear"
-              "1password"
-              "github"
-              "jetbrains-toolbox"
-
-              "ukelele"
-              "karabiner-elements"
-              "stats"
-              "shottr"
-              "rustdesk"
-              "wireshark-app"
-
-              "xykong/tap/flux-markdown" # markdown rendering for QuickLook
-              "hyperkey" # Caps Lock modifier for Super
-              "typewhisper/tap/typewhisper" # STT
-
-              "blender"
-              "thunderbird"
-              "zotero"
-              "adobe-creative-cloud"
-              "microsoft-openjdk@21"
-              "omnissa-horizon-client"
-              "cyberduck"
-
-              "vlc"
-              "handbrake-app"
-              "kodi"
-
-              "swiftdefaultappsprefpane"
-              "meetingbar"
-
-              "lunar-client"
-              "whisky"
-              "steam"
-
-              "zed"
-              "visual-studio-code"
-              "vscodium"
-              "cursor"
-
-              "codex"
-
-              "utm"
-              "signal"
-              "telegram"
-
-              "microsoft-powerpoint"
-              "microsoft-word"
-
-              "discord"
-              "slack"
-              "parsec"
-              "obs"
-              "obsidian"
-              "ollama-app"
-              "macfuse"
-              "veracrypt"
-              "warp"
-
-              "tor-browser"
-              "arc"
-              "librewolf"
-              "firefox@developer-edition"
-              "ungoogled-chromium"
-              "zen"
-            ];
-
-            onActivation.cleanup = "zap";
-          };
-
-          system.defaults = {
-            dock.autohide = true;
-            dock.tilesize = 60;
-            dock.persistent-apps = [
-              "/System/Volumes/Data/Applications/Firefox Developer Edition.app"
-              "/System/Volumes/Data/Applications/Thunderbird.app"
-              "/System/Volumes/Data/Applications/Slack.app"
-            ];
-
-            finder.AppleShowAllExtensions = true;
-            finder.AppleShowAllFiles = true;
-            loginwindow.GuestEnabled = false;
-            NSGlobalDomain."com.apple.swipescrolldirection" = false;
-            NSGlobalDomain.AppleICUForce24HourTime = true;
-            NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
-
-            # Enabled keyboard input sources. CZX is the custom layout installed
-            # to /Library/Keyboard Layouts/ via the activation script above.
-            # May require a logout/login for macOS to register changes.
-            CustomUserPreferences."com.apple.HIToolbox".AppleEnabledInputSources = [
-              {
-                InputSourceKind = "Keyboard Layout";
-                "KeyboardLayout ID" = 0;
-                "KeyboardLayout Name" = "U.S.";
-              }
-              {
-                InputSourceKind = "Keyboard Layout";
-                "KeyboardLayout ID" = -9364;
-                "KeyboardLayout Name" = "CZX";
-              }
-              {
-                "Bundle ID" = "com.apple.CharacterPaletteIM";
-                InputSourceKind = "Non Keyboard Input Method";
-              }
-              {
-                "Bundle ID" = "com.apple.PressAndHold";
-                InputSourceKind = "Non Keyboard Input Method";
-              }
-              {
-                "Bundle ID" = "com.apple.inputmethod.ironwood";
-                InputSourceKind = "Non Keyboard Input Method";
-              }
-            ];
-          };
-
           nix.settings.experimental-features = "nix-command flakes";
           system.configurationRevision = self.rev or self.dirtyRev or null;
           system.stateVersion = 5;
@@ -393,6 +235,8 @@
         modules = [
           configuration
           ./modules/firefox-extensions.nix
+          ./modules/homebrew.nix
+          ./modules/system-defaults.nix
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
           {
@@ -408,109 +252,12 @@
               {
                 imports = [
                   ./modules/firefox.nix
+                  ./modules/git.nix
+                  ./modules/zsh.nix
+                  ./modules/ghostty.nix
                 ];
 
                 home.stateVersion = "25.05";
-                programs.git = {
-                  enable = true;
-                  settings = {
-                    user.name = "Filip Troníček";
-                    user.email = "filip.tronicek@seznam.cz";
-
-                    init.defaultBranch = "main";
-
-                    pull.rebase = true;
-
-                    push.default = "simple";
-                    push.autoSetupRemote = true;
-                    push.followTags = true;
-
-                    fetch.prune = true;
-                    fetch.pruneTags = true;
-                    fetch.all = true;
-
-                    core.editor = "cursor --wait";
-
-                    column.ui = "auto";
-                    branch.sort = "committerdate";
-                    tag.sort = "version:refname";
-
-                    diff.algorithm = "histogram";
-                    diff.colorMoved = "plain";
-                    diff.mnemonicPrefix = true;
-                    diff.renames = true;
-
-                    rebase.autoSquash = true;
-                    rebase.autoStash = true;
-                    rebase.updateRefs = true;
-
-                    rerere.enabled = true;
-                    rerere.autoupdate = true;
-
-                    help.autocorrect = "prompt";
-
-                    commit.gpgSign = true;
-                    commit.verbose = true;
-
-                    gpg.program = "${pkgs.gnupg}/bin/gpg";
-                  };
-                };
-                programs.zoxide = {
-                  enable = true;
-                  enableZshIntegration = true;
-                  options = [
-                    "--cmd"
-                    "cd"
-                  ];
-                };
-
-                programs.ghostty = {
-                  enable = true;
-                  package = null;
-                  settings = {
-                    theme = "light:GitHub Light Default,dark:GitHub Dark Default";
-                    font-family = "JetBrains Mono";
-                    font-feature = [
-                      "zero" # slashed zeros
-                      "ss02" # alternate `=>`, `>=`, `<=` arrow forms
-                      "ss19" # dotted zero alternative styling
-                    ];
-                  };
-                };
-
-                programs.zsh = {
-                  enable = true;
-                  enableCompletion = true;
-                  completionInit = ''
-                    autoload -Uz compinit
-                    compinit -C
-                  '';
-                  autosuggestion = {
-                    enable = true;
-                  };
-
-                  shellAliases = {
-                    gocov = "go test -cover ./...";
-                    update = "{ cd ~/.config/nix && nix flake update && sudo darwin-rebuild switch --flake ~/.config/nix#mbp } && brew update && brew upgrade && home-manager expire-generations '-14 days' && nix-collect-garbage --delete-older-than 14d && sudo nix-collect-garbage --delete-older-than 14d";
-
-                    ytmp3 = "yt-dlp --ffmpeg-location ${pkgs.ffmpeg}/bin -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 -o '%(title)s.%(ext)s'";
-                    ytvideo = "yt-dlp --ffmpeg-location ${pkgs.ffmpeg}/bin -f bestvideo+bestaudio --merge-output-format mp4 -o '%(title)s.%(ext)s'";
-
-                    # GNU utils alternatives
-                    cat = "bat";
-                    ls = "eza";
-                    ll = "eza -l";
-                    la = "eza -la";
-                    tree = "eza -T";
-                  };
-
-                  initContent = ''
-                    ruby_gem_bin="''${GEM_HOME:-$HOME/.gem/ruby/${builtins.baseNameOf pkgs.ruby.gemPath}}/bin"
-                    go_bin="''${GOPATH:-$HOME/go}/bin"
-                    path=("$HOME/.local/bin" $path "$ruby_gem_bin" "$go_bin")
-                    unset ruby_gem_bin go_bin
-                  '';
-                };
               };
 
             nix-homebrew = {
