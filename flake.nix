@@ -151,12 +151,12 @@
                         fi
 
                         # Handle MonitorControl login item as primary user
-                        sudo -u ${vars.username} osascript <<EOF
+                        sudo -u ${vars.username} osascript >/dev/null <<EOF
                           tell application "System Events"
                             try
                               delete (every login item whose name is "MonitorControl")
                             end try
-                            make login item at end with properties {path:"${pkgs.monitorcontrol}/Applications/MonitorControl.app", hidden:false}
+                            make login item at end with properties {name:"MonitorControl", path:"${pkgs.monitorcontrol}/Applications/MonitorControl.app", hidden:false}
                           end tell
             EOF
 
@@ -164,8 +164,10 @@
                         command -v rustup >/dev/null && rustup default stable
 
                         # Use Cloudflare NTP for system time
-                        systemsetup -setnetworktimeserver time.cloudflare.com >/dev/null
-                        systemsetup -setusingnetworktime on >/dev/null
+                        systemsetup -setnetworktimeserver time.cloudflare.com >/dev/null 2>&1 || \
+                          echo "Warning: Could not set network time server. Check macOS Date & Time settings." >&2
+                        systemsetup -setusingnetworktime on >/dev/null 2>&1 || \
+                          echo "Warning: Could not enable network time. Check macOS Date & Time settings." >&2
 
                         # Install custom keyboard layouts system-wide.
                         # After first install, add "CZX" via System Settings → Keyboard → Input Sources.
@@ -215,8 +217,8 @@
               "loom"
               "raycast"
               "orbstack"
-              "tailscale"
-              "linear-linear"
+              "tailscale-app"
+              "linear"
               "1password"
               "github"
               "jetbrains-toolbox"
@@ -269,9 +271,9 @@
               "slack"
               "parsec"
               "obs"
-              "meetingbar"
               "obsidian"
-              "ollama"
+              "ollama-app"
+              "macfuse"
               "veracrypt"
               "warp"
 
@@ -403,11 +405,19 @@
                 programs.zoxide = {
                   enable = true;
                   enableZshIntegration = true;
+                  options = [
+                    "--cmd"
+                    "cd"
+                  ];
                 };
 
                 programs.zsh = {
                   enable = true;
                   enableCompletion = true;
+                  completionInit = ''
+                    autoload -Uz compinit
+                    compinit -C
+                  '';
                   autosuggestion = {
                     enable = true;
                   };
@@ -428,11 +438,10 @@
                   };
 
                   initContent = ''
-                    export PATH="$PATH:$(go env GOPATH)/bin"
-                    export PATH="$(gem env gemdir)/bin:$PATH"
-                    export PATH="$HOME/.local/bin:$PATH"
-
-                    eval "$(zoxide init zsh --cmd cd)"
+                    ruby_gem_bin="''${GEM_HOME:-$HOME/.gem/ruby/${builtins.baseNameOf pkgs.ruby.gemPath}}/bin"
+                    go_bin="''${GOPATH:-$HOME/go}/bin"
+                    path=("$HOME/.local/bin" "$ruby_gem_bin" $path "$go_bin")
+                    unset ruby_gem_bin go_bin
                   '';
                 };
               };
