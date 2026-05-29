@@ -392,6 +392,7 @@
       darwinConfigurations."mbp" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
+          ./modules/firefox-extensions.nix
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
           {
@@ -401,9 +402,14 @@
 
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "hm-backup";
             home-manager.users.${vars.username} =
               { pkgs, ... }:
               {
+                imports = [
+                  ./modules/firefox.nix
+                ];
+
                 home.stateVersion = "25.05";
                 programs.git = {
                   enable = true;
