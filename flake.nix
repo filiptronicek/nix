@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
@@ -33,6 +34,7 @@
       self,
       nix-darwin,
       nixpkgs,
+      nixpkgs-stable,
       nix-homebrew,
       home-manager,
       ...
@@ -46,17 +48,29 @@
       configuration =
         { pkgs, ... }:
         let
-          pipx = pkgs.pipx.overridePythonAttrs (old: {
-            disabledTests = (old.disabledTests or [ ]) ++ [
-              # Broken against current packaging normalization, which emits
-              # "name @ url" rather than the historical "name@ url".
-              "test_fix_package_name"
-              "test_parse_specifier_for_metadata"
-            ];
-          });
+          stablePkgs = import nixpkgs-stable {
+            inherit (pkgs.stdenv.hostPlatform) system;
+            config.allowUnfree = true;
+          };
           wrangler = pkgs.wrangler.override {
             # wrangler 4.93.0 fails during tsup on the current default Node.
             nodejs = pkgs.nodejs_22;
+          };
+          clock-check = pkgs.rustPlatform.buildRustPackage {
+            pname = "clock-check";
+            version = "0.4.0";
+            src = pkgs.fetchFromGitHub {
+              owner = "filiptronicek";
+              repo = "time-server";
+              rev = "03ff54c8521dad45eb63ffd4c03b92e9e16f40d6";
+              hash = "sha256-rxm2lPJTEkRTvXixnUe+j7DmUpS4fQXEQZYL4BiP88Y=";
+            };
+            cargoHash = "sha256-V4/H4aYgIT07fTvzBIR/opv5hkz3i4HwPRTvkzwJjKE=";
+            cargoBuildFlags = [ "-p" "clock-check" ];
+            cargoTestFlags = [ "-p" "clock-check" ];
+            doCheck = false;
+            nativeBuildInputs = [ pkgs.pkg-config ];
+            buildInputs = [ pkgs.openssl ];
           };
         in
         {
@@ -73,6 +87,7 @@
             pkgs.cmake
             pkgs.rustup
             pkgs.ruby
+            clock-check
 
             # Cloud & Infrastructure
             pkgs.awscli2
@@ -80,13 +95,12 @@
             pkgs.turso-cli
             pkgs.cloudflared
             pkgs.atlas
-            pkgs.golangci-lint
             wrangler
 
             # Languages & Runtime
             pkgs.nodejs
             pkgs.python314
-            pipx
+            stablePkgs.pipx
             pkgs.bun
 
             pkgs.texliveMedium
@@ -211,6 +225,30 @@
               "gnu-sed"
               "php"
               "gitpod-io/tap/ona"
+              "rust-analyzer"
+            ];
+            goPackages = [
+              "github.com/filiptronicek/bruh"
+              "github.com/mattn/bsky"
+              "github.com/bufbuild/buf/cmd/buf"
+              "github.com/go-delve/delve/cmd/dlv"
+              "github.com/tantalor93/dnspyre/v2"
+              "github.com/golangci/golangci-lint/cmd/golangci-lint"
+              "golang.org/x/tools/gopls"
+              "github.com/mitranim/gow"
+              "github.com/fullstorydev/grpcurl/cmd/grpcurl"
+              "github.com/interclip/iclip"
+              "github.com/tdewolff/minify/v2/cmd/minify"
+              "go.uber.org/mock/mockgen"
+              "github.com/csweichel/oci-tool"
+              "connectrpc.com/connect/cmd/protoc-gen-connect-go"
+              "github.com/sudorandom/protoc-gen-connect-openapi"
+              "google.golang.org/protobuf/cmd/protoc-gen-go"
+              "google.golang.org/grpc/cmd/protoc-gen-go-grpc"
+              "github.com/bufbuild/protoschema-plugins/cmd/protoc-gen-jsonschema"
+              "github.com/gitpod-io/gitpod-next/api/go/tools/logfields/protoc-logfields"
+              "github.com/boyter/scc/v3"
+              "honnef.co/go/tools/cmd/staticcheck"
             ];
             casks = [
               "figma"
