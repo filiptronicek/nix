@@ -117,9 +117,6 @@
         pkgs.bottom
         pkgs.unixtools.watch
         pkgs.defaultbrowser
-        pkgs.zoxide
-        pkgs.bat
-        pkgs.eza
         pkgs.zstd
         pkgs.upx
 
@@ -195,11 +192,18 @@
                     sudo -u ${vars.username} ${pkgs.duti}/bin/duti ${./duti-config.txt}
       '';
 
-      environment.etc."pam.d/sudo_local".text = ''
-        # sudo_local: local config file which survives system update and is included for sudo
-        # uncomment following line to enable Touch ID for sudo
-        auth       sufficient     pam_tid.so
-      '';
+      security.pam.services.sudo_local = {
+        touchIdAuth = true;
+        watchIdAuth = true; # Apple Watch sudo
+        reattach = true; # works inside tmux/screen
+      };
+
+      nix.gc = {
+        automatic = true;
+        options = "--delete-older-than 14d";
+      };
+      nix.optimise.automatic = true;
+      nix.linux-builder.enable = true;
 
       nixpkgs.config.allowUnfree = true;
 
