@@ -45,6 +45,20 @@
       };
       configuration =
         { pkgs, ... }:
+        let
+          pipx = pkgs.pipx.overridePythonAttrs (old: {
+            disabledTests = (old.disabledTests or [ ]) ++ [
+              # Broken against current packaging normalization, which emits
+              # "name @ url" rather than the historical "name@ url".
+              "test_fix_package_name"
+              "test_parse_specifier_for_metadata"
+            ];
+          });
+          wrangler = pkgs.wrangler.override {
+            # wrangler 4.93.0 fails during tsup on the current default Node.
+            nodejs = pkgs.nodejs_22;
+          };
+        in
         {
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
@@ -67,11 +81,12 @@
             pkgs.cloudflared
             pkgs.atlas
             pkgs.golangci-lint
-            pkgs.wrangler
+            wrangler
 
             # Languages & Runtime
+            pkgs.nodejs
             pkgs.python314
-            pkgs.pipx
+            pipx
             pkgs.bun
 
             pkgs.texliveMedium
@@ -117,6 +132,7 @@
             pkgs.qbittorrent
             pkgs.monitorcontrol
             pkgs.duti
+            pkgs.ghostty-bin
           ];
 
           # Add activation script
@@ -187,7 +203,6 @@
               "bettercap"
               "gnupg"
               "go"
-              "nvm"
               "pnpm"
               "handbrake"
               "paperjam"
@@ -240,6 +255,8 @@
               "visual-studio-code"
               "vscodium"
               "cursor"
+
+              "codex"
 
               "utm"
               "signal"
@@ -411,14 +428,6 @@
                   };
 
                   initContent = ''
-                    # NVM initialization
-                    export NVM_DIR="$HOME/.nvm"
-                    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-                    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-
-                    # Install LTS Node.js if not already installed
-                    [ ! -e "$NVM_DIR/versions/node" ] && nvm install --lts
-
                     export PATH="$PATH:$(go env GOPATH)/bin"
                     export PATH="$(gem env gemdir)/bin:$PATH"
                     export PATH="$HOME/.local/bin:$PATH"
