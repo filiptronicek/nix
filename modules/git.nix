@@ -18,7 +18,7 @@
       fetch.pruneTags = true;
       fetch.all = true;
 
-      core.editor = "cursor --wait";
+      core.editor = "zed --wait";
 
       column.ui = "auto";
       branch.sort = "committerdate";

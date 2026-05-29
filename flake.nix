@@ -241,7 +241,7 @@
           home-manager.darwinModules.home-manager
           {
             environment.variables = {
-              EDITOR = "cursor --wait";
+              EDITOR = "zed --wait";
             };
 
             home-manager.useGlobalPkgs = true;
@@ -255,6 +255,7 @@
                   ./modules/git.nix
                   ./modules/zsh.nix
                   ./modules/ghostty.nix
+                  ./modules/zed.nix
                 ];
 
                 home.stateVersion = "25.05";
