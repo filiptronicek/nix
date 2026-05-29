@@ -66,8 +66,14 @@
               hash = "sha256-rxm2lPJTEkRTvXixnUe+j7DmUpS4fQXEQZYL4BiP88Y=";
             };
             cargoHash = "sha256-V4/H4aYgIT07fTvzBIR/opv5hkz3i4HwPRTvkzwJjKE=";
-            cargoBuildFlags = [ "-p" "clock-check" ];
-            cargoTestFlags = [ "-p" "clock-check" ];
+            cargoBuildFlags = [
+              "-p"
+              "clock-check"
+            ];
+            cargoTestFlags = [
+              "-p"
+              "clock-check"
+            ];
             doCheck = false;
             nativeBuildInputs = [ pkgs.pkg-config ];
             buildInputs = [ pkgs.openssl ];
@@ -87,6 +93,7 @@
             pkgs.cmake
             pkgs.rustup
             pkgs.ruby
+            pkgs.fastlane
             clock-check
 
             # Cloud & Infrastructure
@@ -102,6 +109,7 @@
             pkgs.python314
             stablePkgs.pipx
             pkgs.bun
+            pkgs.deno
 
             pkgs.texliveMedium
 
@@ -478,7 +486,7 @@
                   initContent = ''
                     ruby_gem_bin="''${GEM_HOME:-$HOME/.gem/ruby/${builtins.baseNameOf pkgs.ruby.gemPath}}/bin"
                     go_bin="''${GOPATH:-$HOME/go}/bin"
-                    path=("$HOME/.local/bin" "$ruby_gem_bin" $path "$go_bin")
+                    path=("$HOME/.local/bin" $path "$ruby_gem_bin" "$go_bin")
                     unset ruby_gem_bin go_bin
                   '';
                 };
