@@ -47,14 +47,27 @@
     "zotero@chnm.gmu.edu" = "https://download.zotero.org/connector/firefox/release/Zotero_Connector-latest.xpi";
   };
 
-  mkPolicy = url: {
-    installation_mode = "normal_installed";
-    install_url = url;
-  };
+  # Extensions that should also run in private browsing windows.
+  privateBrowsing = [
+    "uBlock0@raymondhill.net"
+    "{dbcc42f9-c979-4f53-8a95-a102fbff3bbe}" # Ona
+    "search@kagi.com" # Kagi Search
+  ];
+
+  mkPolicy = id: url:
+    {
+      installation_mode = "normal_installed";
+      install_url = url;
+    }
+    // (
+      if builtins.elem id privateBrowsing
+      then {private_browsing = true;}
+      else {}
+    );
 
   extensionSettings =
-    (builtins.mapAttrs (_id: slug: mkPolicy (amoUrl slug)) amoExtensions)
-    // (builtins.mapAttrs (_id: url: mkPolicy url) extraExtensions);
+    (builtins.mapAttrs (id: slug: mkPolicy id (amoUrl slug)) amoExtensions)
+    // (builtins.mapAttrs (id: url: mkPolicy id url) extraExtensions);
 
   policies = {
     policies = {
