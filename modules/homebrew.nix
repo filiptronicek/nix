@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   homebrew = {
     enable = true;
 
@@ -114,4 +114,18 @@
 
     onActivation.cleanup = "zap";
   };
+
+  system.activationScripts.postActivation.text = ''
+    # Homebrew bundle cleanup removes unmanaged packages; this prunes cached downloads.
+    if [ -x "${config.homebrew.prefix}/bin/brew" ]; then
+      echo >&2 "Homebrew cache cleanup..."
+      PATH="${config.homebrew.prefix}/bin:$PATH" \
+        sudo \
+          --preserve-env=PATH \
+          --user=${config.homebrew.user} \
+          --set-home \
+          brew cleanup --prune=all -s || \
+            echo >&2 "Warning: Homebrew cache cleanup failed; continuing activation."
+    fi
+  '';
 }
