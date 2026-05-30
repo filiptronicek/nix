@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{config, pkgs, ...}: let
   amoUrl = slug: "https://addons.mozilla.org/firefox/downloads/latest/${slug}/latest.xpi";
 
   # addon-id → AMO slug
@@ -80,6 +80,45 @@ in {
   system.activationScripts.extraActivation.text = ''
     # Firefox enterprise policies — declarative extension list.
     install -d -m 755 "/Library/Application Support/Mozilla"
-    install -m 644 ${policiesJson} "/Library/Application Support/Mozilla/policies.json"
+
+    # Build policies at activation so Kagi token can come from macOS Keychain
+    # and never be stored in Nix files/store.
+    tmp_policies="$(mktemp -t firefox-policies.XXXXXX.json)"
+    cp ${policiesJson} "$tmp_policies"
+
+    primary_user="${config.system.primaryUser}"
+    kagi_token="$(sudo -u "$primary_user" security find-generic-password -a "$primary_user" -s "kagi-search-token" -w 2>/dev/null || true)"
+    kagi_token="$(printf "%s" "$kagi_token" | tr -d '\r\n')"
+
+    if [ -n "$kagi_token" ]; then
+      ${pkgs.jq}/bin/jq --arg token "$kagi_token" '
+        .policies.SearchEngines = {
+          Add: [
+            {
+              Name: "Kagi",
+              URLTemplate: ("https://kagi.com/search?token=" + $token + "&q={searchTerms}"),
+              Alias: "@k"
+            }
+          ],
+          Default: "Kagi"
+        }
+      ' "$tmp_policies" > "$tmp_policies.out"
+    else
+      ${pkgs.jq}/bin/jq '
+        .policies.SearchEngines = {
+          Add: [
+            {
+              Name: "Kagi",
+              URLTemplate: "https://kagi.com/search?q={searchTerms}",
+              Alias: "@k"
+            }
+          ],
+          Default: "Kagi"
+        }
+      ' "$tmp_policies" > "$tmp_policies.out"
+    fi
+
+    install -m 644 "$tmp_policies.out" "/Library/Application Support/Mozilla/policies.json"
+    rm -f "$tmp_policies" "$tmp_policies.out"
   '';
 }

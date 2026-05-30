@@ -26,3 +26,20 @@ rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 
 - Because of security limitations on macOS, we can't set Privacy and Security preferences.
 - Because of more macOS weirdness, we can't set the Screen Saver
+
+## Kagi Search Token
+
+Firefox policies read Kagi token from macOS Keychain service `kagi-search-token`
+during activation (no token file in this repo).
+
+Set/update token once:
+
+```sh
+security add-generic-password -a "$USER" -s "kagi-search-token" -w "PASTE_TOKEN_HERE" -U
+```
+
+Then rebuild:
+
+```sh
+sudo nix run nix-darwin/master#darwin-rebuild --extra-experimental-features "nix-command flakes" -- switch --flake ~/.config/nix#mbp
+```
