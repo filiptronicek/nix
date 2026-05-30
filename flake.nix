@@ -128,6 +128,7 @@
 
         pkgs.ffmpeg
         pkgs.imagemagick
+        pkgs.exiftool
         pkgs.yt-dlp
         pkgs.shaka-packager
         pkgs.mkvtoolnix
