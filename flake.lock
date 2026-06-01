@@ -54,11 +54,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1780099287,
-        "narHash": "sha256-efIPwVGtIWIjWcznhaop6XN6HxnOL8800hF6CBNvlqQ=",
+        "lastModified": 1780342707,
+        "narHash": "sha256-wQ56uDoEMaZ9XPHCtSUEGn6beBO7Egy6sCT0N/NM4Fo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7d8127d308c3fb9664f7e643eec944be74ebb37d",
+        "rev": "5a608a621b001922dd708ca51a6260d5bef9e29b",
         "type": "github"
       },
       "original": {
@@ -139,11 +139,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1780030872,
-        "narHash": "sha256-u6WU/yd/o8iYQrHX3RAwO1hYa3LkoSL+WNQD0rJfJZQ=",
+        "lastModified": 1780246643,
+        "narHash": "sha256-4T1KWX7xWGQMs9hNZ24IOY3aYOi8D6+5WtkNRBSttB8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e9a7635a57597d9754eccebdfc7045e6c8600e6b",
+        "rev": "3109eaae18e09d0b8aef23dc2579e7d94b8d4b4e",
         "type": "github"
       },
       "original": {
@@ -185,11 +185,11 @@
     "xykong-tap": {
       "flake": false,
       "locked": {
-        "lastModified": 1778638751,
-        "narHash": "sha256-EGdLnzf3wD/w1Cr7QcEX3nlddcx0qATMECi6KXwYTvk=",
+        "lastModified": 1780330630,
+        "narHash": "sha256-C1MAiTDxmygptAg0dLx1jO3jTCF//tlil0YaTa3LV0U=",
         "owner": "xykong",
         "repo": "homebrew-tap",
-        "rev": "ab94af12dc097fbb971f8e7e56806e354065a002",
+        "rev": "b14d4e3800521846e62c621447529c865959b80b",
         "type": "github"
       },
       "original": {
