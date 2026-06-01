@@ -255,7 +255,7 @@
               ./modules/zed.nix
             ];
 
-            home.stateVersion = "25.05";
+            home.stateVersion = "26.05";
           };
 
           nix-homebrew = {
