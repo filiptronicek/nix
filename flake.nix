@@ -39,7 +39,7 @@
     ...
   }: let
     vars = {
-      defaultbrowser = "browser"; # this is what Arc is
+      defaultbrowser = "zen";
       username = "filip";
       homeDirectory = "/Users/${vars.username}";
     };
@@ -152,17 +152,10 @@
 
       # Add activation script
       system.activationScripts.extraActivation.text = ''
-                    # Set Arc as default browser.
-                    # Arc must be launched at least once before it registers as an HTTP handler.
-                    # On a fresh install, open Arc in the background so it can register, then retry.
-                    if [ -d "/Applications/Arc.app" ]; then
-                      if ! sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser} 2>/dev/null; then
-                        echo "Arc not yet registered as an HTTP handler — launching Arc to register it..."
-                        sudo -u ${vars.username} open -a "Arc" 2>/dev/null || true
-                        sleep 5
-                        sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser} || \
-                          echo "Warning: Could not set Arc as default browser. Re-run 'sudo darwin-rebuild switch --flake ~/.config/nix#mbp' after Arc has launched."
-                      fi
+                    # Set Zen as default browser.
+                    if [ -d "/Applications/Zen.app" ]; then
+                      sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser} || \
+                        echo "Warning: Could not set Zen as default browser."
                     fi
 
                     # Handle MonitorControl login item as primary user
