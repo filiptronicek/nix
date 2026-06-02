@@ -46,6 +46,19 @@
     '';
     autosuggestion.enable = true;
 
+    plugins = [
+      {
+        name = "zsh-shift-select";
+        file = "zsh-shift-select.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "jirutka";
+          repo = "zsh-shift-select";
+          rev = "da460999b7d31aef0f0a82a3e749d70edf6f2ef9";
+          hash = "sha256-ekA8acUgNT/t2SjSBGJs2Oko5EB7MvVUccC6uuTI/vc=";
+        };
+      }
+    ];
+
     shellAliases = {
       gocov = "go test -cover ./...";
       # darwin-rebuild now handles brew update/upgrade (homebrew.onActivation)
