@@ -22,6 +22,9 @@
     finder._FXSortFoldersFirst = true;
     finder.FXDefaultSearchScope = "SCcf"; # search current folder by default
     finder.FXEnableExtensionChangeWarning = false;
+    CustomUserPreferences."com.apple.finder".NSUserKeyEquivalents = {
+      Rename = builtins.fromJSON ''"\uf705"''; # F2
+    };
 
     # ─── Login window ─────────────────────────────────────────────────
     loginwindow.GuestEnabled = false;
