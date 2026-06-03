@@ -228,6 +228,7 @@
         configuration
         ./modules/firefox-extensions.nix
         ./modules/homebrew.nix
+        ./modules/karabiner.nix
         ./modules/system-defaults.nix
         nix-homebrew.darwinModules.nix-homebrew
         home-manager.darwinModules.home-manager
