@@ -119,6 +119,7 @@
         pkgs.defaultbrowser
         pkgs.zstd
         pkgs.upx
+        pkgs.sl
 
         # Data Processing & Formatting
         pkgs.jq
