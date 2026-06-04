@@ -111,6 +111,8 @@
         # System & File Utilities
         pkgs.coreutils
         pkgs.wget
+        pkgs.websocat
+        pkgs.curl
         pkgs.rclone
         pkgs.p7zip
         pkgs.dust
