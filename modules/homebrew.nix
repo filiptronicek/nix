@@ -112,7 +112,11 @@
       "zen"
     ];
 
-    onActivation.cleanup = "zap";
+    onActivation = {
+      # autoUpdate = true; # these two somehow break upgrading the go packages listed above.
+      # upgrade = true;
+      cleanup = "zap";
+    };
   };
 
   system.activationScripts.postActivation.text = ''
