@@ -40,6 +40,9 @@
         tool_permissions.default = "allow";
         model_parameters = [];
       };
+      lsp.nixd.binary = {
+        path = "${pkgs.nixd}/bin/nixd";
+      };
 
       # Edit predictions (Copilot), but not in Markdown or Plain Text
       edit_predictions.provider = "copilot";
@@ -47,6 +50,7 @@
         Markdown.show_edit_predictions = false;
         "Plain Text".show_edit_predictions = false;
         Nix = {
+          language_servers = ["nixd" "!nil"];
           formatter = {
             external = {
               command = "${pkgs.alejandra}/bin/alejandra";
