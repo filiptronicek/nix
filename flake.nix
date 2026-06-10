@@ -232,10 +232,11 @@
         ./modules/firefox-extensions.nix
         ./modules/homebrew.nix
         ./modules/karabiner.nix
+        ./modules/menu-bar.nix
         ./modules/system-defaults.nix
         nix-homebrew.darwinModules.nix-homebrew
         home-manager.darwinModules.home-manager
-        {
+        ({pkgs, ...}: {
           environment.variables = {
             EDITOR = "zed --wait";
           };
@@ -266,7 +267,26 @@
               "typewhisper/homebrew-tap" = inputs.typewhisper-tap;
             };
           };
-        }
+
+          local.menuBar = {
+            allowedApps = [
+              pkgs.monitorcontrol
+              "cc.ffitch.shottr"
+              "com.knollsoft.Hyperkey"
+              "com.raycast.macos"
+              "com.raycast-x.macos"
+              "eu.exelban.Stats"
+              "io.tailscale.ipn.macsys"
+              "leits.MeetingBar"
+              "org.pqrs.Karabiner-Menu"
+            ];
+
+            deniedApps = [
+              "com.henrikruscon.Alcove"
+              "com.kolide.agent"
+            ];
+          };
+        })
       ];
     };
 
