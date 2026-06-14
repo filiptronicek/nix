@@ -31,7 +31,7 @@
       AirDrop = false;
       Bluetooth = false;
       Display = false;
-      FocusModes = true;
+      FocusModes = false;
       NowPlaying = false;
       Sound = true;
     };
