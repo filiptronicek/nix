@@ -180,6 +180,10 @@
                     systemsetup -setusingnetworktime on >/dev/null 2>&1 || \
                       echo "Warning: Could not enable network time. Check macOS Date & Time settings." >&2
 
+                    # Use Cloudflare DNS for the primary network service.
+                    networksetup -setdnsservers "Wi-Fi" 1.1.1.1 1.0.0.1 >/dev/null 2>&1 || \
+                      echo "Warning: Could not set DNS servers for Wi-Fi." >&2
+
                     # Install custom keyboard layouts system-wide.
                     # After first install, add "CZX" via System Settings → Keyboard → Input Sources.
                     install -d -m 755 "/Library/Keyboard Layouts"
