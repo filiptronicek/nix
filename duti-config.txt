@@ -15,3 +15,11 @@ org.videolan.vlc public.mp3 all
 org.videolan.vlc public.mpeg-4-audio all
 org.videolan.vlc com.microsoft.waveform-audio all
 org.videolan.vlc org.xiph.flac all
+
+# Mail - Thunderbird
+org.mozilla.thunderbird mailto all
+
+# Calendar - Apple Calendar
+com.apple.iCal com.apple.ical.ics all
+com.apple.iCal webcal all
+com.apple.iCal webcals all
