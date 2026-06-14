@@ -26,6 +26,26 @@
       Rename = builtins.fromJSON ''"\uf705"''; # F2
     };
 
+    # ─── System Settings → Menu Bar ──────────────────────────────────
+    controlcenter = {
+      AirDrop = false;
+      Bluetooth = false;
+      Display = false;
+      FocusModes = true;
+      NowPlaying = false;
+      Sound = true;
+    };
+
+    CustomUserPreferences."com.apple.controlcenter" = {
+      "NSStatusItem Visible Battery" = false;
+      "NSStatusItem Visible BentoBox" = true; # Control Center
+      "NSStatusItem Visible MusicRecognition" = false;
+      "NSStatusItem Visible Shortcuts" = false;
+      "NSStatusItem Visible WiFi" = false;
+      "NSStatusItem VisibleCC BentoBox-0" = true;
+      "NSStatusItem VisibleCC Clock" = true;
+    };
+
     # ─── Login window ─────────────────────────────────────────────────
     loginwindow.GuestEnabled = false;
 
