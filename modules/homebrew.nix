@@ -107,7 +107,6 @@
 
       "tor-browser"
       "arc"
-      "librewolf"
       "firefox@developer-edition"
       "ungoogled-chromium"
       "zen"
