@@ -270,6 +270,13 @@
               "xykong/homebrew-tap" = inputs.xykong-tap;
               "typewhisper/homebrew-tap" = inputs.typewhisper-tap;
             };
+            trust.formulae = [
+              "gitpod-io/tap/ona"
+            ];
+            trust.casks = [
+              "xykong/tap/flux-markdown"
+              "typewhisper/tap/typewhisper"
+            ];
           };
 
           local.menuBar = {

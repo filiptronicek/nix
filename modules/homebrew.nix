@@ -86,6 +86,7 @@
       "cursor"
 
       "codex"
+      "codex-app"
 
       "utm"
       "signal"
