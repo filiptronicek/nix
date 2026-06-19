@@ -85,6 +85,7 @@
       "vscodium"
       "cursor"
 
+      "claude"
       "codex"
       "codex-app"
 
