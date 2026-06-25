@@ -1,4 +1,4 @@
-{...}: {
+{lib, ...}: {
   system.defaults = {
     # ─── Dock ─────────────────────────────────────────────────────────
     dock.autohide = true;
@@ -70,6 +70,7 @@
     NSGlobalDomain.NSAutomaticDashSubstitutionEnabled = false;
     NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
     NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
+    CustomUserPreferences.NSGlobalDomain.NSGlassTintAmount = "0.6";
 
     # Enabled keyboard input sources. CZX is the custom layout installed
     # to /Library/Keyboard Layouts/ via the activation script. May require
@@ -99,4 +100,10 @@
       }
     ];
   };
+
+  # nix-darwin's "default" icon style is null, which means this key must
+  # be absent rather than set to a value.
+  system.activationScripts.userDefaults.text = lib.mkAfter ''
+    defaults delete -g AppleIconAppearanceTheme 2>/dev/null || true
+  '';
 }
