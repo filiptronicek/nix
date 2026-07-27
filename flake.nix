@@ -105,6 +105,7 @@
         stablePkgs.pipx
         pkgs.bun
         pkgs.deno
+        pkgs.pnpm
 
         pkgs.texliveMedium
 
