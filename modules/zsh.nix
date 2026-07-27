@@ -25,7 +25,8 @@
 
   programs.fzf = {
     enable = true;
-    enableZshIntegration = true; # adds Ctrl-R history + Ctrl-T file picker
+    enableZshIntegration = true;
+    historyWidget.zsh.command = ""; # Atuin owns Ctrl-R
   };
 
   programs.bat.enable = true;
