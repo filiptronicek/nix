@@ -44,7 +44,7 @@
   # Extensions whose .xpi isn't on AMO — e.g. Zotero distributes their
   # own. Add as `"<addon-id>" = "<direct-xpi-url>";`.
   extraExtensions = {
-    "zotero@chnm.gmu.edu" = "https://download.zotero.org/connector/firefox/release/Zotero_Connector-latest.xpi";
+    "zotero@chnm.gmu.edu" = "https://www.zotero.org/download/connector/dl?browser=firefox";
   };
 
   # Extensions that should also run in private browsing windows.
@@ -78,12 +78,14 @@
   policiesJson = pkgs.writeText "firefox-policies.json" (builtins.toJSON policies);
 in {
   system.activationScripts.extraActivation.text = ''
-    # Firefox enterprise policies — declarative extension list.
-    install -d -m 755 "/Library/Application Support/Mozilla"
+    # Developer Edition uses its own bundle ID for macOS preferences.
+    # This works before first launch and survives app updates.
 
     # Build policies at activation so Kagi token can come from macOS Keychain
     # and never be stored in Nix files/store.
-    tmp_policies="$(mktemp -t firefox-policies.XXXXXX.json)"
+    tmp_policy_dir="$(mktemp -d -t firefox-policies.XXXXXX)"
+    tmp_policies="$tmp_policy_dir/policies.json"
+    trap 'rm -rf "$tmp_policy_dir"' EXIT
     cp ${policiesJson} "$tmp_policies"
 
     primary_user="${config.system.primaryUser}"
@@ -118,7 +120,11 @@ in {
       ' "$tmp_policies" > "$tmp_policies.out"
     fi
 
-    install -m 644 "$tmp_policies.out" "/Library/Application Support/Mozilla/policies.json"
-    rm -f "$tmp_policies" "$tmp_policies.out"
+    ${pkgs.jq}/bin/jq '.policies + {EnterprisePoliciesEnabled: true}' \
+      "$tmp_policies.out" > "$tmp_policies.plist"
+    /usr/bin/plutil -convert xml1 "$tmp_policies.plist"
+    /usr/bin/defaults import /Library/Preferences/org.mozilla.firefoxdeveloperedition "$tmp_policies.plist"
+    rm -rf "$tmp_policy_dir"
+    trap - EXIT
   '';
 }

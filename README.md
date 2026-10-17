@@ -27,6 +27,26 @@ rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 - Because of security limitations on macOS, we can't set Privacy and Security preferences.
 - Because of more macOS weirdness, we can't set the Screen Saver
 
+## Firefox extensions
+
+`modules/firefox-extensions.nix` declares the extensions. Activation imports the
+policies into `/Library/Preferences/org.mozilla.firefoxdeveloperedition.plist` and enables
+`EnterprisePoliciesEnabled`. Firefox Developer Edition reads these macOS policies
+on startup, including for new profiles on a fresh machine; no manual extension
+installation or first launch before rebuilding is needed. Firefox downloads the
+latest extensions from Mozilla Add-ons (and Zotero from its official site), so
+internet access is required. Extensions can still be disabled in Firefox.
+
+After rebuilding, fully quit and reopen Firefox. Check `about:policies` for active
+`ExtensionSettings` and errors, then `about:addons` for installed extensions.
+Policies live outside the app bundle so Firefox/Homebrew updates preserve them.
+The old `/Library/Application Support/Mozilla/policies.json` location is unused
+by Firefox on macOS.
+
+If macOS blocks a full rebuild from updating apps, grant the terminal running
+`darwin-rebuild` access in System Settings → Privacy & Security → App Management.
+
+
 ## Kagi Search Token
 
 Firefox policies read Kagi token from macOS Keychain service `kagi-search-token`
