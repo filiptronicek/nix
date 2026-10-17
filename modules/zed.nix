@@ -3,6 +3,11 @@
     enable = true;
     package = null; # installed via cask
 
+    extensions = [
+      "nix"
+      "github-theme"
+    ];
+
     # Allow Zed to write back to settings.json / keymap.json so transient
     # state (e.g. SSH host list, recent files) doesn't get clobbered on
     # every rebuild. Declared values below are the base; Zed-driven
