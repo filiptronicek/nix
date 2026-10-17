@@ -2,6 +2,11 @@
   homebrew = {
     enable = true;
 
+    extraConfig = ''
+      # The installed linker cannot read the macOS 27 SDK; use the matching SDK for Go builds.
+      ENV["SDKROOT"] = "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk"
+    '';
+
     brews = [
       "bettercap"
       "gnupg"
@@ -34,7 +39,6 @@
       "google.golang.org/protobuf/cmd/protoc-gen-go"
       "google.golang.org/grpc/cmd/protoc-gen-go-grpc"
       "github.com/bufbuild/protoschema-plugins/cmd/protoc-gen-jsonschema"
-      "github.com/gitpod-io/gitpod-next/api/go/tools/logfields/protoc-logfields"
       "github.com/boyter/scc/v3"
       "honnef.co/go/tools/cmd/staticcheck"
     ];
@@ -87,7 +91,7 @@
 
       "claude"
       "codex"
-      "codex-app"
+      "chatgpt"
 
       "utm"
       "signal"
