@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   programs.git = {
     enable = true;
+    lfs.enable = true;
     settings = {
       user.name = "Filip Troníček";
       user.email = "filip.tronicek@seznam.cz";
