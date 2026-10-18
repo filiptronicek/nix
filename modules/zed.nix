@@ -6,6 +6,7 @@
     extensions = [
       "nix"
       "github-theme"
+      "git-firefly"
     ];
 
     # Allow Zed to write back to settings.json / keymap.json so transient
