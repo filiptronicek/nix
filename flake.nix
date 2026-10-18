@@ -39,7 +39,7 @@
     ...
   }: let
     vars = {
-      defaultbrowser = "browser"; # this is what Arc is
+      defaultbrowser = "firefoxdeveloperedition";
       username = "filip";
       homeDirectory = "/Users/${vars.username}";
     };
@@ -156,16 +156,15 @@
 
       # Add activation script
       system.activationScripts.extraActivation.text = ''
-                    # Set Arc as default browser.
-                    # Arc must be launched at least once before it registers as an HTTP handler.
-                    # On a fresh install, open Arc in the background so it can register, then retry.
-                    if [ -d "/Applications/Arc.app" ]; then
+                    # Set Firefox Developer Edition as default browser.
+                    # Launch it on fresh installs if it has not registered as an HTTP handler.
+                    if [ -d "/Applications/Firefox Developer Edition.app" ]; then
                       if ! sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser} 2>/dev/null; then
-                        echo "Arc not yet registered as an HTTP handler — launching Arc to register it..."
-                        sudo -u ${vars.username} open -a "Arc" 2>/dev/null || true
+                        echo "Firefox Developer Edition not yet registered as an HTTP handler — launching it to register..."
+                        sudo -u ${vars.username} open -a "Firefox Developer Edition" 2>/dev/null || true
                         sleep 5
                         sudo -u ${vars.username} ${pkgs.defaultbrowser}/bin/defaultbrowser ${vars.defaultbrowser} || \
-                          echo "Warning: Could not set Arc as default browser. Re-run 'sudo darwin-rebuild switch --flake ~/.config/nix#mbp' after Arc has launched."
+                          echo "Warning: Could not set Firefox Developer Edition as default browser. Re-run 'sudo darwin-rebuild switch --flake ~/.config/nix#mbp' after Firefox has launched."
                       fi
                     fi
 
