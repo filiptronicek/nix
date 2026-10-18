@@ -4,9 +4,12 @@
     package = null; # installed via cask
 
     extensions = [
+      # languages
       "nix"
-      "github-theme"
+      "lua"
       "git-firefly"
+
+      "github-theme"
     ];
 
     # Allow Zed to write back to settings.json / keymap.json so transient
