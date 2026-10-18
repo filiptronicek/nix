@@ -10,7 +10,6 @@
     dock.persistent-apps = [
       "/System/Volumes/Data/Applications/Firefox Developer Edition.app"
       "/System/Volumes/Data/Applications/Thunderbird.app"
-      "/System/Volumes/Data/Applications/Slack.app"
     ];
 
     # ─── Finder ───────────────────────────────────────────────────────
