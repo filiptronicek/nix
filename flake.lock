@@ -162,8 +162,25 @@
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
+        "tinycast-tap": "tinycast-tap",
         "typewhisper-tap": "typewhisper-tap",
         "xykong-tap": "xykong-tap"
+      }
+    },
+    "tinycast-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792233999,
+        "narHash": "sha256-gPYDZsWXwEJZ7SBfxQjSul/2sXTl7iyuGa175ibcq98=",
+        "owner": "abue-ammar",
+        "repo": "homebrew-tinycast",
+        "rev": "8047459f985e064cbac0a81f416596a31664fb87",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abue-ammar",
+        "repo": "homebrew-tinycast",
+        "type": "github"
       }
     },
     "typewhisper-tap": {

@@ -49,7 +49,7 @@
       "figma"
       "loom"
       "raycast"
-      "orbstack"
+      "abue-ammar/tinycast/tinycast"
       "tailscale-app"
       "linear"
       "1password"
@@ -114,6 +114,7 @@
 
       "tor-browser"
       "arc"
+      "brave-browser"
       "firefox@developer-edition"
       "ungoogled-chromium"
       "zen"

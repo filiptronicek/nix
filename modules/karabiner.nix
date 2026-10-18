@@ -62,27 +62,6 @@
                 ];
             }
             {
-              description = "Raycast: Cmd+Shift+E opens Emoji & Symbols";
-              manipulators = [
-                {
-                  type = "basic";
-                  from = {
-                    key_code = "e";
-                    modifiers = {
-                      mandatory = ["command" "shift"];
-                      optional = ["caps_lock"];
-                    };
-                  };
-                  to = [
-                    {
-                      shell_command = "/usr/bin/open -g 'raycast://extensions/raycast/emoji-symbols/search-emoji-symbols'";
-                      repeat = false;
-                    }
-                  ];
-                }
-              ];
-            }
-            {
               description = "Map x to alt+g";
               enabled = false;
               manipulators = [
@@ -94,27 +73,6 @@
                     {
                       key_code = "g";
                       modifiers = ["left_option"];
-                    }
-                  ];
-                  type = "basic";
-                }
-              ];
-            }
-            {
-              description = "Raycast: Cmd+Shift+C opens Clipboard History";
-              manipulators = [
-                {
-                  from = {
-                    key_code = "c";
-                    modifiers = {
-                      mandatory = ["command" "shift"];
-                      optional = ["caps_lock"];
-                    };
-                  };
-                  to = [
-                    {
-                      shell_command = "/usr/bin/open -g 'raycast://extensions/raycast/clipboard-history/clipboard-history'";
-                      repeat = false;
                     }
                   ];
                   type = "basic";

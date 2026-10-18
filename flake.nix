@@ -22,6 +22,10 @@
       url = "github:typewhisper/homebrew-tap";
       flake = false;
     };
+    tinycast-tap = {
+      url = "github:abue-ammar/homebrew-tinycast";
+      flake = false;
+    };
 
     dotfiles = {
       url = "github:filiptronicek/dotfiles";
@@ -243,6 +247,7 @@
         ./modules/firefox-extensions.nix
         ./modules/homebrew.nix
         ./modules/karabiner.nix
+        ./modules/tinycast.nix
         ./modules/menu-bar.nix
         ./modules/system-defaults.nix
         nix-homebrew.darwinModules.nix-homebrew
@@ -278,11 +283,13 @@
               "gitpod-io/homebrew-tap" = inputs.gitpod-tap;
               "xykong/homebrew-tap" = inputs.xykong-tap;
               "typewhisper/homebrew-tap" = inputs.typewhisper-tap;
+              "abue-ammar/homebrew-tinycast" = inputs.tinycast-tap;
             };
             trust.formulae = [
               "gitpod-io/tap/ona"
             ];
             trust.casks = [
+              "abue-ammar/tinycast/tinycast"
               "xykong/tap/flux-markdown"
               "typewhisper/tap/typewhisper"
             ];
@@ -301,6 +308,7 @@
             ];
 
             deniedApps = [
+              "com.tinycast.app"
               "com.henrikruscon.Alcove"
               "com.kolide.agent"
             ];
