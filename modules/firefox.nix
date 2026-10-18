@@ -1,5 +1,25 @@
-{...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  profileIndex = "Library/Application Support/Firefox/profiles.ini";
+  initialProfileIndex = pkgs.writeText "firefox-profiles.ini" config.home.file.${profileIndex}.text;
+in {
   # Firefox Developer Edition declarative config.
+
+  # Firefox must write its installation/default-profile metadata here.
+  # Seed it from Home Manager, then let Firefox maintain the writable index.
+  home.file.${profileIndex}.enable = false;
+  home.activation.firefoxWritableProfileIndex = lib.hm.dag.entryAfter ["linkGeneration"] ''
+    profile_index=${lib.escapeShellArg "${config.home.homeDirectory}/${profileIndex}"}
+    if [ -L "$profile_index" ] || [ ! -e "$profile_index" ]; then
+      run mkdir -p "$(dirname "$profile_index")"
+      run install -m 600 ${initialProfileIndex} "$profile_index.writable"
+      run mv -f "$profile_index.writable" "$profile_index"
+    fi
+  '';
 
   programs.firefox = {
     enable = true;
@@ -62,6 +82,8 @@
         "signon.firefoxRelay.feature" = "disabled";
 
         # ─── UI / behavior ────────────────────────────────────────────────
+        "extensions.activeThemeID" = "default-theme@mozilla.org"; # follow macOS appearance
+        "layout.css.prefers-color-scheme.content-override" = 2; # automatic website appearance
         "browser.aboutConfig.showWarning" = false;
         "browser.ctrlTab.sortByRecentlyUsed" = true; # MRU tab cycling
         "browser.display.document_color_use" = 0; # respect site colors
