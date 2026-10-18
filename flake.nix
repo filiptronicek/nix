@@ -93,6 +93,7 @@
         pkgs.rustup
         pkgs.ruby
         pkgs.fastlane
+        pkgs.colima
         clock-check
 
         # Cloud & Infrastructure
