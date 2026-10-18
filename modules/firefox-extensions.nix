@@ -1,4 +1,8 @@
-{config, pkgs, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   amoUrl = slug: "https://addons.mozilla.org/firefox/downloads/latest/${slug}/latest.xpi";
 
   # addon-id → AMO slug
@@ -13,7 +17,6 @@
 
     # Productivity / utilities
     "{446900e4-71c2-419f-a6a7-df9c091e268b}" = "bitwarden-password-manager";
-    "languagetool-webextension@languagetool.org" = "languagetool";
     "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}" = "refined-github-";
     "cookie-manager@robwu.nl" = "a-cookie-manager";
     "clipper@obsidian.md" = "web-clipper-obsidian";
@@ -26,9 +29,6 @@
     "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = "return-youtube-dislikes";
     "{84c8edb0-65ca-43a5-bc53-0e80f41486e1}" = "tweaks-for-youtube";
     "myallychou@gmail.com" = "youtube-recommended-videos"; # Unhook
-
-    # Wikipedia
-    "{e9090647-32ff-48e4-9c3c-1361e8fd270e}" = "modern-for-wikipedia";
 
     # Search
     "search@kagi.com" = "kagi-search-for-firefox";
