@@ -261,6 +261,7 @@
               ./modules/git.nix
               ./modules/zsh.nix
               ./modules/ghostty.nix
+              ./modules/obsidian.nix
               ./modules/zed.nix
             ];
 
