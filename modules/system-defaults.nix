@@ -1,4 +1,27 @@
-{lib, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  # Upstream restores the previous on/off state after changing the schedule,
+  # which can override the automatic schedule with a manual "off".
+  nightlight = pkgs.nightlight.overrideAttrs (old: {
+    postPatch =
+      (old.postPatch or "")
+      + ''
+        substituteInPlace src/lib.rs \
+          --replace-fail 'let status = self.status()?;' '/* Let macOS apply the new schedule. */' \
+          --replace-fail 'self.toggle(status)' 'Ok(())'
+      '';
+  });
+  configureNightShift = pkgs.writeShellScript "configure-night-shift" ''
+    set -e
+    # Reset the mode to clear a manual override even if the schedule is unchanged.
+    ${nightlight}/bin/nightlight schedule stop
+    ${nightlight}/bin/nightlight schedule start
+  '';
+in {
   system.defaults = {
     # ─── Dock ─────────────────────────────────────────────────────────
     dock.autohide = true;
@@ -121,6 +144,12 @@
   # nix-darwin's "default" icon style is null, which means this key must
   # be absent rather than set to a value.
   system.activationScripts.userDefaults.text = lib.mkAfter ''
+    # Restore macOS's automatic sunset-to-sunrise Night Shift schedule.
+    # Requires Location Services for macOS to determine sunset and sunrise.
+    launchctl asuser "$(id -u -- ${lib.escapeShellArg config.system.primaryUser})" \
+      sudo --user=${lib.escapeShellArg config.system.primaryUser} -- \
+      ${configureNightShift}
+
     defaults delete -g AppleIconAppearanceTheme 2>/dev/null || true
 
     # Free Cmd+Shift+3/4 for CleanShot via Karabiner. Merge only these
