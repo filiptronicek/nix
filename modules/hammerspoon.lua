@@ -4,6 +4,18 @@ local hyper = { "cmd", "alt", "ctrl", "shift" }
 hs.menuIcon(false)
 hs.window.animationDuration = 0
 
+-- Physical Czech number-row keys (2–0), independent of layout key names.
+local uppercaseAccents = {
+  [19] = "Ě", [20] = "Š", [21] = "Č",
+  [23] = "Ř", [22] = "Ž", [26] = "Ý",
+  [28] = "Á", [25] = "Í", [29] = "É",
+}
+for keycode, character in pairs(uppercaseAccents) do
+  hs.hotkey.bind(hyper, keycode, function()
+    hs.eventtap.keyStrokes(character)
+  end)
+end
+
 hs.hotkey.bind(hyper, "c", function()
   local win = hs.window.focusedWindow()
   if win then
