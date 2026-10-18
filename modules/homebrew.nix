@@ -60,6 +60,7 @@
       "karabiner-elements"
       "stats"
       "shottr"
+      "cleanshot"
       "rustdesk"
       "wireshark-app"
 

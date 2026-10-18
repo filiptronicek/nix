@@ -14,6 +14,54 @@
         complex_modifications = {
           rules = [
             {
+              description = "Caps Lock → Hyper (Control+Option+Shift+Command)";
+              manipulators = [
+                {
+                  type = "basic";
+                  from = {
+                    key_code = "caps_lock";
+                    modifiers.optional = ["any"];
+                  };
+                  to = [
+                    {
+                      key_code = "left_shift";
+                      modifiers = ["left_control" "left_option" "left_command"];
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              description = "CleanShot: Cmd+Shift+3 captures screen, Cmd+Shift+4 captures area";
+              manipulators =
+                map (binding: {
+                  type = "basic";
+                  from = {
+                    key_code = binding.key;
+                    modifiers = {
+                      mandatory = ["command" "shift"];
+                      # Extra Control/Option modifiers must retain native behavior.
+                      optional = ["caps_lock"];
+                    };
+                  };
+                  to = [
+                    {
+                      shell_command = "/usr/bin/open -g 'cleanshot://${binding.action}'";
+                      repeat = false;
+                    }
+                  ];
+                }) [
+                  {
+                    key = "3";
+                    action = "capture-fullscreen";
+                  }
+                  {
+                    key = "4";
+                    action = "capture-area";
+                  }
+                ];
+            }
+            {
               description = "Map x to alt+g";
               enabled = false;
               manipulators = [
@@ -151,7 +199,7 @@
         ];
         virtual_hid_keyboard = {
           country_code = 0;
-          keyboard_type_v2 = "ansi";
+          keyboard_type_v2 = "iso";
         };
       }
     ];
