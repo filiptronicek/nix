@@ -62,6 +62,27 @@
                 ];
             }
             {
+              description = "Raycast: Cmd+Shift+E opens Emoji & Symbols";
+              manipulators = [
+                {
+                  type = "basic";
+                  from = {
+                    key_code = "e";
+                    modifiers = {
+                      mandatory = ["command" "shift"];
+                      optional = ["caps_lock"];
+                    };
+                  };
+                  to = [
+                    {
+                      shell_command = "/usr/bin/open -g 'raycast://extensions/raycast/emoji-symbols/search-emoji-symbols'";
+                      repeat = false;
+                    }
+                  ];
+                }
+              ];
+            }
+            {
               description = "Map x to alt+g";
               enabled = false;
               manipulators = [
@@ -80,34 +101,20 @@
               ];
             }
             {
-              description = "Finder: Cmd+Shift+C copies selected items as pathnames";
+              description = "Raycast: Cmd+Shift+C opens Clipboard History";
               manipulators = [
                 {
-                  conditions = [
-                    {
-                      bundle_identifiers = [
-                        "^com\\.apple\\.finder$"
-                      ];
-                      type = "frontmost_application_if";
-                    }
-                  ];
                   from = {
                     key_code = "c";
                     modifiers = {
-                      mandatory = [
-                        "left_command"
-                        "left_shift"
-                      ];
-                      optional = ["any"];
+                      mandatory = ["command" "shift"];
+                      optional = ["caps_lock"];
                     };
                   };
                   to = [
                     {
-                      key_code = "c";
-                      modifiers = [
-                        "left_command"
-                        "left_option"
-                      ];
+                      shell_command = "/usr/bin/open -g 'raycast://extensions/raycast/clipboard-history/clipboard-history'";
+                      repeat = false;
                     }
                   ];
                   type = "basic";
