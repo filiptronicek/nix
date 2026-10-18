@@ -59,6 +59,7 @@
 
     # ─── Global keyboard / input ──────────────────────────────────────
     NSGlobalDomain."com.apple.swipescrolldirection" = false;
+    NSGlobalDomain."com.apple.keyboard.fnState" = true;
     NSGlobalDomain.AppleICUForce24HourTime = true;
     NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
     NSGlobalDomain.AppleSpacesSwitchOnActivate = true; # cmd-tab jumps to app's space
