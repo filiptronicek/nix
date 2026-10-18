@@ -7,6 +7,7 @@
     dock.tilesize = 60;
     dock.mru-spaces = false; # don't reorder spaces by recency
     dock.show-recents = false;
+    dock.persistent-others = []; # no pinned folders/stacks, including Downloads
     dock.persistent-apps = [
       "/System/Volumes/Data/Applications/Firefox Developer Edition.app"
       "/System/Volumes/Data/Applications/Thunderbird.app"
@@ -72,6 +73,22 @@
     NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
     CustomUserPreferences.NSGlobalDomain.NSGlassTintAmount = "0.6";
 
+    # Use Stats for the battery menu bar item (the native item is hidden above).
+    CustomUserPreferences."eu.exelban.Stats" = {
+      CPU_state = false;
+      GPU_state = false;
+      RAM_state = false;
+      Disk_state = false;
+      Sensors_state = false;
+      Network_state = false;
+      Bluetooth_state = false;
+      Clock_state = false;
+      Battery_state = true;
+      Battery_battery_additional = "innerPercentage";
+      # Applies to outside text; Stats handles inside text separately.
+      Battery_battery_hideAdditionalWhenFull = true;
+    };
+
     # Enabled keyboard input sources. CZX is the custom layout installed
     # to /Library/Keyboard Layouts/ via the activation script. May require
     # a logout/login for macOS to register changes.
@@ -105,5 +122,12 @@
   # be absent rather than set to a value.
   system.activationScripts.userDefaults.text = lib.mkAfter ''
     defaults delete -g AppleIconAppearanceTheme 2>/dev/null || true
+
+    # Free Cmd+Shift+3/4 for CleanShot via Karabiner. Merge only these
+    # entries; preserve clipboard shortcuts (29/31), the toolbar (184),
+    # and all other system shortcuts.
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add \
+      28 '<dict><key>enabled</key><false/></dict>' \
+      30 '<dict><key>enabled</key><false/></dict>'
   '';
 }
