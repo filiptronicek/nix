@@ -111,7 +111,6 @@
       "ollama-app"
       "macfuse"
       "veracrypt"
-      "warp"
 
       "tor-browser"
       "arc"
