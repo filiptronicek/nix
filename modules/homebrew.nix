@@ -10,6 +10,7 @@
     brews = [
       "bettercap"
       "gnupg"
+      "pinentry-mac"
       "go"
       "pnpm"
       "handbrake"
@@ -44,6 +45,7 @@
     ];
 
     casks = [
+      "secretive" # Secure Enclave Git signing with Touch ID
       "figma"
       "loom"
       "raycast"
@@ -62,7 +64,7 @@
       "wireshark-app"
 
       "xykong/tap/flux-markdown" # markdown rendering for QuickLook
-      "hyperkey" # Caps Lock modifier for Super
+      "hammerspoon" # Declarative Hyper shortcuts and window management
       "typewhisper/tap/typewhisper" # STT
 
       "blender"

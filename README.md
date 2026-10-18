@@ -27,6 +27,21 @@ rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 - Because of security limitations on macOS, we can't set Privacy and Security preferences.
 - Because of more macOS weirdness, we can't set the Screen Saver
 
+## Hyper shortcuts
+
+Karabiner maps Caps Lock to Control+Option+Shift+Command. Hammerspoon handles
+the shortcuts from `modules/hammerspoon.lua`, installed by Home Manager into
+`~/.hammerspoon/init.lua` and started at login by a LaunchAgent. Its menu bar
+icon is hidden by the Lua configuration.
+
+| Shortcut | Action |
+| --- | --- |
+| ⇪ C | Center the focused window on its current display without resizing |
+| ⇪ M | Maximize the focused window (without entering full screen) |
+| ⇪ N | Move the focused window to the next display |
+| ⇪ I | Open System Settings |
+| ⇪ L | Lock the computer |
+
 ## Firefox extensions
 
 `modules/firefox-extensions.nix` declares the extensions. Activation imports the
