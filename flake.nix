@@ -290,7 +290,6 @@
             allowedApps = [
               pkgs.monitorcontrol
               "cc.ffitch.shottr"
-              "com.knollsoft.Hyperkey"
               "com.raycast.macos"
               "com.raycast-x.macos"
               "eu.exelban.Stats"
