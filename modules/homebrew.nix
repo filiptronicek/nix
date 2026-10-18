@@ -71,7 +71,7 @@
       "blender"
       "thunderbird"
       "zotero"
-      "adobe-creative-cloud"
+      "affinity"
       "microsoft-openjdk@21"
       "omnissa-horizon-client"
       "cyberduck"
