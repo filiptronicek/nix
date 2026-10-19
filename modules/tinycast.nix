@@ -1,11 +1,12 @@
 {config, ...}: let
   # Tinycast stores HotKeyBinding as JSON; Carbon Cmd=256, Shift=512, Control=4096.
-  shortcut = keyCode: modifiers: builtins.toJSON {
-    combo._0 = {
-      carbonKeyCode = keyCode;
-      carbonModifiers = modifiers;
+  shortcut = keyCode: modifiers:
+    builtins.toJSON {
+      combo._0 = {
+        carbonKeyCode = keyCode;
+        carbonModifiers = modifiers;
+      };
     };
-  };
 in {
   system.defaults.CustomUserPreferences."com.tinycast.app" = {
     clipboardEnabled = true;
@@ -15,11 +16,11 @@ in {
     "hotkey.togglePalette" = "";
   };
 
-  # Keep clipboard collection running from login, even before opening the picker.
+  # Keep clipboard collection running from login, reusing any existing instance.
   home-manager.users.${config.system.primaryUser}.launchd.agents.tinycast = {
     enable = true;
     config = {
-      ProgramArguments = ["/Applications/Tinycast.app/Contents/MacOS/Tinycast"];
+      ProgramArguments = ["/usr/bin/open" "-g" "-a" "/Applications/Tinycast.app"];
       RunAtLoad = true;
       ProcessType = "Interactive";
     };
