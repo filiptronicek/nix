@@ -96,6 +96,9 @@ in {
     NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
     CustomUserPreferences.NSGlobalDomain.NSGlassTintAmount = "0.6";
 
+    # Use the standalone Tailscale app's native login helper.
+    CustomUserPreferences."io.tailscale.ipn.macsys".TailscaleStartOnLogin = true;
+
     # Use Stats for the battery menu bar item (the native item is hidden above).
     CustomUserPreferences."eu.exelban.Stats" = {
       CPU_state = false;
