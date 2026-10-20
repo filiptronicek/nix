@@ -56,6 +56,23 @@
         # wrangler 4.93.0 fails during tsup on the current default Node.
         nodejs = pkgs.nodejs_22;
       };
+      audacity = pkgs.audacity.overrideAttrs (old: {
+        # Qt 6.12's generated Type collides with extensions::Type in unity builds.
+        postPatch =
+          (old.postPatch or "")
+          + ''
+            echo 'set_target_properties(muse_extensions_qml PROPERTIES UNITY_BUILD OFF)' >> muse/framework/extensions/qml/Muse/Extensions/CMakeLists.txt
+          '';
+      });
+      qbittorrent = pkgs.qbittorrent.overrideAttrs (old: {
+        # Qt 6.12 deprecates Q_OS_MAC; qBittorrent 5.2.4 treats this as an error.
+        postPatch =
+          (old.postPatch or "")
+          + ''
+            substituteInPlace src/gui/log/loglistview.cpp src/gui/optionsdialog.cpp \
+              --replace-fail '#ifdef Q_OS_MAC' '#ifdef Q_OS_MACOS'
+          '';
+      });
       clock-check = pkgs.rustPlatform.buildRustPackage {
         pname = "clock-check";
         version = "0.4.0";
@@ -152,8 +169,8 @@
 
         # GUI Applications
         pkgs.git-credential-manager
-        pkgs.audacity
-        pkgs.qbittorrent
+        audacity
+        qbittorrent
         pkgs.monitorcontrol
         pkgs.duti
         pkgs.ghostty-bin
