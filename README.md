@@ -41,6 +41,7 @@ icon is hidden by the Lua configuration.
 | ⇪ N | Move the focused window to the next display |
 | ⇪ I | Open System Settings |
 | ⇪ L | Lock the computer |
+| ⇪ R | Capture the previous area with CleanShot |
 
 ## Firefox extensions
 
