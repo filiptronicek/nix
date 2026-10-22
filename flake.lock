@@ -36,11 +36,11 @@
     "gitpod-tap": {
       "flake": false,
       "locked": {
-        "lastModified": 1792510903,
-        "narHash": "sha256-EDLGe2r6nVp1cxoSYYigJEZD48pXrA/Xjx6/71yKi4I=",
+        "lastModified": 1792700717,
+        "narHash": "sha256-vTymOGww02Two/tF5EbF++Y7enwJB0CthI9RqvNWH9k=",
         "owner": "gitpod-io",
         "repo": "homebrew-tap",
-        "rev": "900ef48346e607d0478b204860143349bb2a45e0",
+        "rev": "622952653792bcf60f35a0837eb3bd59c9b1532a",
         "type": "github"
       },
       "original": {
@@ -54,11 +54,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1792495086,
-        "narHash": "sha256-TyoYH983Nsc++1scw0SoOEKshPSJWJDxK7tTmuZ974M=",
+        "lastModified": 1792703141,
+        "narHash": "sha256-3X34FaSeMJXMx8CK/BN6sZ9knwNauuiJXQhLM+bQQuI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ec80131710bffcdf3b8498cf41f3a0579833b023",
+        "rev": "6750249c69969d09d952efaf3fab88a2bdac7ec6",
         "type": "github"
       },
       "original": {
@@ -74,11 +74,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792366139,
-        "narHash": "sha256-jto4pdsl0bgErQ5vaMc3gOyj//PILLRJuqX3I7fUk6s=",
+        "lastModified": 1792667976,
+        "narHash": "sha256-qlW9xfM0TFDIU6wGTXfTZ2xSgvgOlV89YHdvfjQ+e0Q=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "f0ec2b3fae4df92ea7788359aef9e07bb88d720f",
+        "rev": "38cf0abb072c30fff68da0e3f516fc8a7cfb8fc0",
         "type": "github"
       },
       "original": {
@@ -136,11 +136,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1792488032,
-        "narHash": "sha256-RkAXQ3+a5rHMiP97Er7AawR1kvEXX9tK1mhiWedOPTc=",
+        "lastModified": 1792506237,
+        "narHash": "sha256-Q/8KLB6jNfpaUN1HAedE/u/Et9feE/zYSsutBLKrCFk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e513db7b0a65def6f6e17bb55195dfe510871944",
+        "rev": "5adc50831c259f87faeb09ddf930d43597197473",
         "type": "github"
       },
       "original": {
@@ -167,11 +167,11 @@
     "tinycast-tap": {
       "flake": false,
       "locked": {
-        "lastModified": 1792437999,
-        "narHash": "sha256-WJAnegtCt/vCzhZB++bcfsI/4LGgdQzmnVIwWrqEuog=",
+        "lastModified": 1792633905,
+        "narHash": "sha256-xlvdPvGWHIHzjV99w1sAKb6PXixSIvfVU1KFVC9rGLU=",
         "owner": "abue-ammar",
         "repo": "homebrew-tinycast",
-        "rev": "1d73c57a3b74ca0cd81de1a82fea9b29ae023560",
+        "rev": "7af5ba845f6ccf6980e23c3c11c8fd062ad6bdf2",
         "type": "github"
       },
       "original": {
