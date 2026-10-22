@@ -21,6 +21,25 @@
     ${nightlight}/bin/nightlight schedule stop
     ${nightlight}/bin/nightlight schedule start
   '';
+  # Use the same CoreBrightness keyboard API as System Settings. The old
+  # AmbientLightSensor defaults are not used on current Apple Silicon Macs.
+  disableKeyboardBacklight = pkgs.writeText "disable-keyboard-backlight.js" ''
+    ObjC.import("Foundation");
+    $.NSBundle.bundleWithPath("/System/Library/PrivateFrameworks/CoreBrightness.framework").load;
+    var client = $.NSClassFromString("KeyboardBrightnessClient").alloc.init;
+    var keyboards = ObjC.deepUnwrap(client.copyKeyboardBacklightIDs);
+    keyboards.forEach(function (id) {
+      client.enableAutoBrightnessForKeyboard(false, id);
+      client.setBrightnessForKeyboard(0, id);
+    });
+
+    delay(0.411^2); // don't ask, we just wait some time so that we can verify that this got applied
+    keyboards.forEach(function (id) {
+      if (client.isAutoBrightnessEnabledForKeyboard(id) || client.brightnessForKeyboard(id) !== 0) {
+        throw new Error("Could not disable keyboard backlight for " + id);
+      }
+    });
+  '';
 in {
   system.defaults = {
     # ─── Dock ─────────────────────────────────────────────────────────
@@ -147,6 +166,10 @@ in {
   # nix-darwin's "default" icon style is null, which means this key must
   # be absent rather than set to a value.
   system.activationScripts.userDefaults.text = lib.mkAfter ''
+    launchctl asuser "$(id -u -- ${lib.escapeShellArg config.system.primaryUser})" \
+      sudo --user=${lib.escapeShellArg config.system.primaryUser} -- \
+      /usr/bin/osascript -l JavaScript ${disableKeyboardBacklight}
+
     # Restore macOS's automatic sunset-to-sunrise Night Shift schedule.
     # Requires Location Services for macOS to determine sunset and sunrise.
     launchctl asuser "$(id -u -- ${lib.escapeShellArg config.system.primaryUser})" \
