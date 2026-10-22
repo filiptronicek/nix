@@ -48,3 +48,7 @@ end)
 hs.hotkey.bind(hyper, "r", function()
   hs.urlevent.openURL("cleanshot://capture-previous-area")
 end)
+
+hs.hotkey.bind(hyper, "s", function()
+  hs.urlevent.openURL("cleanshot://capture-area")
+end)

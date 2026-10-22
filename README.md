@@ -27,6 +27,12 @@ rm /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
 - Because of security limitations on macOS, we can't set Privacy and Security preferences.
 - Because of more macOS weirdness, we can't set the Screen Saver
 
+## Keyboard backlight
+
+The keyboard backlight is set to zero with automatic brightness disabled on
+each rebuild. This is managed in `modules/system-defaults.nix` using
+macOS's private CoreBrightness API, which may need updating after a macOS upgrade.
+
 ## Hyper shortcuts
 
 Karabiner maps Caps Lock to Control+Option+Shift+Command. Hammerspoon handles
@@ -42,6 +48,7 @@ icon is hidden by the Lua configuration.
 | <kbd>⇪I</kbd> | Open System Settings |
 | <kbd>⇪L</kbd> | Lock the computer |
 | <kbd>⇪R</kbd> | Capture the previous area with CleanShot |
+| <kbd>⇪S</kbd> | Capture an area with CleanShot |
 
 ## Firefox extensions
 
