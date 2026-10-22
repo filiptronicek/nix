@@ -36,12 +36,12 @@ icon is hidden by the Lua configuration.
 
 | Shortcut | Action |
 | --- | --- |
-| ⇪ C | Center the focused window on its current display without resizing |
-| ⇪ M | Maximize the focused window (without entering full screen) |
-| ⇪ N | Move the focused window to the next display |
-| ⇪ I | Open System Settings |
-| ⇪ L | Lock the computer |
-| ⇪ R | Capture the previous area with CleanShot |
+| <kbd>⇪C</kbd> | Center the focused window on its current display without resizing |
+| <kbd>⇪M</kbd> | Maximize the focused window (without entering full screen) |
+| <kbd>⇪N</kbd> | Move the focused window to the next display |
+| <kbd>⇪I</kbd> | Open System Settings |
+| <kbd>⇪L</kbd> | Lock the computer |
+| <kbd>⇪R</kbd> | Capture the previous area with CleanShot |
 
 ## Firefox extensions
 
