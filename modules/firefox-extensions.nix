@@ -72,6 +72,15 @@
   policies = {
     policies = {
       ExtensionSettings = extensionSettings;
+      # Reset fixed bundled themes: removing the active theme
+      # makes Firefox's add-on manager enable System theme. activeThemeID in
+      # user.js alone does not update the add-on database. Keep this policy so
+      # restored bundled themes are reset on startup as well.
+      Extensions.Uninstall = [
+        "firefox-compact-dark@mozilla.org"
+        "firefox-compact-light@mozilla.org"
+        "firefox-alpenglow@mozilla.org"
+      ];
     };
   };
 

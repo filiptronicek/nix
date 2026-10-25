@@ -82,7 +82,9 @@ in {
         "signon.firefoxRelay.feature" = "disabled";
 
         # ─── UI / behavior ────────────────────────────────────────────────
-        "extensions.activeThemeID" = "default-theme@mozilla.org"; # follow macOS appearance
+        # Seed new profiles; firefox-extensions.nix migrates existing themes.
+        "extensions.activeThemeID" = "default-theme@mozilla.org";
+        "services.sync.prefs.sync.extensions.activeThemeID" = false;
         "layout.css.prefers-color-scheme.content-override" = 2; # automatic website appearance
         "browser.aboutConfig.showWarning" = false;
         "browser.ctrlTab.sortByRecentlyUsed" = true; # MRU tab cycling
