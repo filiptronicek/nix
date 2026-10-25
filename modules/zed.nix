@@ -7,6 +7,7 @@
       # languages
       "nix"
       "lua"
+      "php"
       "git-firefly"
 
       "github-theme"
@@ -51,6 +52,9 @@
       };
       lsp.nixd.binary = {
         path = "${pkgs.nixd}/bin/nixd";
+      };
+      lsp.phpactor.initialization_options = {
+        "php_code_sniffer.enabled" = true;
       };
 
       # Edit predictions (Copilot), but not in Markdown or Plain Text
