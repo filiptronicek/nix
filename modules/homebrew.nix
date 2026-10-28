@@ -97,6 +97,8 @@
       "chatgpt"
 
       "utm"
+
+      "session"
       "signal"
       "telegram"
 
