@@ -4,14 +4,14 @@
   ...
 }: let
   secretiveHome = "${config.home.homeDirectory}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data";
-  signingKey = "${secretiveHome}/PublicKeys/8e97b38e2f5ec600164a9cffa4ee4362.pub";
+  signingPublicKey = "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCzSS6bvUGlnY4JLBx0v9hIpxEcyYhjXHZCbfaQcgJtjL/Zm93kvHi2JFow2ohF52HGhQwTcxFSMB4IeXcwg7Mw=";
   secretiveSign = pkgs.writeShellScript "secretive-ssh-sign" ''
     export SSH_AUTH_SOCK="${secretiveHome}/socket.ssh"
     exec /usr/bin/ssh-keygen "$@"
   '';
 in {
   home.file.".config/git/allowed_signers".text = ''
-    filip@trnck.dev,filip.tronicek@seznam.cz ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCzSS6bvUGlnY4JLBx0v9hIpxEcyYhjXHZCbfaQcgJtjL/Zm93kvHi2JFow2ohF52HGhQwTcxFSMB4IeXcwg7Mw=
+    filip@trnck.dev,filip.tronicek@seznam.cz ${signingPublicKey}
   '';
 
   programs.git = {
@@ -20,7 +20,8 @@ in {
     settings = {
       user.name = "Filip Troníček";
       user.email = "filip@trnck.dev";
-      user.signingkey = signingKey;
+      # Inline the public key to avoid macOS restrictions on Secretive's app container.
+      user.signingkey = "key::${signingPublicKey}";
 
       init.defaultBranch = "main";
 
