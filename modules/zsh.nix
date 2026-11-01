@@ -161,7 +161,8 @@
     initContent = ''
       ruby_gem_bin="''${GEM_HOME:-$HOME/.gem/ruby/${baseNameOf pkgs.ruby.gemPath}}/bin"
       go_bin="''${GOPATH:-$HOME/go}/bin"
-      path=("$HOME/.local/bin" $path "$ruby_gem_bin" "$go_bin")
+      # Keep nix-homebrew's architecture-selecting wrapper ahead of /usr/local/bin.
+      path=("$HOME/.local/bin" /run/current-system/sw/bin $path "$ruby_gem_bin" "$go_bin")
       unset ruby_gem_bin go_bin
     '';
   };
