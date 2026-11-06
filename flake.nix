@@ -94,6 +94,7 @@
         pkgs.ruby
         pkgs.fastlane
         pkgs.colima
+        pkgs.docker
         clock-check
 
         # Cloud & Infrastructure
