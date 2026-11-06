@@ -53,7 +53,6 @@
       "alcove"
       "tailscale-app"
       "linear"
-      "1password"
       "github"
       "jetbrains-toolbox"
 
