@@ -52,6 +52,7 @@
       "abue-ammar/tinycast/tinycast"
       "alcove"
       "tailscale-app"
+      "bitwarden"
       "linear"
       "github"
       "jetbrains-toolbox"
