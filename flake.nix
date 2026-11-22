@@ -273,6 +273,11 @@
               ./modules/zed.nix
             ];
 
+            home.file."Library/Fonts/Ultra-Regular.ttf".source = pkgs.fetchurl {
+              url = "https://raw.githubusercontent.com/google/fonts/5174b3333331c966c38f4355d50b03ca1c1df2f9/apache/ultra/Ultra-Regular.ttf";
+              hash = "sha256-nuY8/7w3nl1Otf7WoLlLdw2pGUl+XLpKInpjk9rgk54=";
+            };
+
             home.stateVersion = "26.05";
           };
 
