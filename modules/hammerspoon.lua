@@ -45,6 +45,10 @@ hs.hotkey.bind(hyper, "l", function()
   hs.caffeinate.lockScreen()
 end)
 
+hs.hotkey.bind(hyper, "o", function()
+  hs.urlevent.openURL("cleanshot://capture-text")
+end)
+
 hs.hotkey.bind(hyper, "r", function()
   hs.urlevent.openURL("cleanshot://capture-previous-area")
 end)

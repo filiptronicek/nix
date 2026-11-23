@@ -47,6 +47,7 @@ icon is hidden by the Lua configuration.
 | <kbd>⇪N</kbd> | Move the focused window to the next display |
 | <kbd>⇪I</kbd> | Open System Settings |
 | <kbd>⇪L</kbd> | Lock the computer |
+| <kbd>⇪O</kbd> | Capture text with CleanShot OCR |
 | <kbd>⇪R</kbd> | Capture the previous area with CleanShot |
 | <kbd>⇪S</kbd> | Capture an area with CleanShot |
 
