@@ -158,6 +158,7 @@
         pkgs.monitorcontrol
         pkgs.duti
         pkgs.ghostty-bin
+        pkgs.ladybird
       ];
 
       # Add activation script
